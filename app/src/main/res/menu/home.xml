@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/menu_group_1">
+        <item
+            android:icon="@drawable/ic_home"
+            android:id="@+id/menu_home"
+            android:title="Home"/>
+        <item
+            android:icon="@drawable/ic_user"
+            android:id="@+id/menu_profile"
+            android:title="Profile"/>
+    </group>
+
+    <group android:id="@+id/menu_group_2">
+        <item
+            android:id="@+id/menu_schedule"
+            android:title="Schedule"
+            android:icon="@drawable/ic_schedule"/>
+        <item
+            android:id="@+id/menu_subjects"
+            android:title="Subjects"
+            android:icon="@drawable/ic_subjects"/>
+        <item
+            android:id="@+id/menu_teachers"
+            android:title="Teachers"
+            android:icon="@drawable/ic_teacher"/>
+    </group>
+
+    <group android:id="@+id/menu_group_3">
+        <item
+            android:id="@+id/menu_logout"
+            android:title="Logout"
+            android:icon="@drawable/ic_logout"/>
+    </group>
+</menu>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#e0e0e0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/nav_profile_photo"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="2.5dp"
+            android:src="@drawable/eg_prof"
+            android:layout_width="125dp"
+            android:layout_height="125dp" />
+        <TextView
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:text="Jimly Asshiddiqy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>
