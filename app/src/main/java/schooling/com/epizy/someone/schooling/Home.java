@@ -1,6 +1,7 @@
 package schooling.com.epizy.someone.schooling;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +23,7 @@ import schooling.com.epizy.someone.schooling.fragments.teachers;
 
 public class Home extends AppCompatActivity {
     Toolbar tb; FrameLayout fl; DrawerLayout dl; CoordinatorLayout cl; NavigationView nv;
-    FragmentManager fm;
+    FragmentManager fm; ActionBarDrawerToggle abdt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,7 @@ public class Home extends AppCompatActivity {
         cl = findViewById(R.id.root_coordinator_home);
         nv = findViewById(R.id.nav_view);
         fm = getSupportFragmentManager();
+
         try {
             fm.beginTransaction().replace(R.id.content_home, home.class.newInstance()).commit();
         } catch (InstantiationException | IllegalAccessException e) {
@@ -43,6 +46,20 @@ public class Home extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true); ab.setHomeAsUpIndicator(R.drawable.ic_menu);
 
+        onClickNavigationView();
+        settingDrawerLayout();
+    }
+
+    private void settingDrawerLayout() {
+        abdt = setupadbt();
+        dl.addDrawerListener(abdt);
+    }
+
+    private ActionBarDrawerToggle setupadbt() {
+        return new ActionBarDrawerToggle(this, dl, tb, R.string.drawer_open, R.string.drawer_close);
+    }
+
+    private void onClickNavigationView() {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -91,8 +108,22 @@ public class Home extends AppCompatActivity {
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        abdt.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        abdt.onConfigurationChanged(newConfig);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home){
+        if(abdt.onOptionsItemSelected(item)){
             dl.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);

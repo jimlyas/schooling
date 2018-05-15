@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_margin="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/input_name_teacher"
+        android:layout_margin="2.5dp"
+        android:padding="5dp"
+        android:background="#eeeeee"
+        android:gravity="center_horizontal"
+        android:hint="Full Name"
+        android:drawableLeft="@drawable/ic_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/input_phone_teacher"
+        android:layout_margin="2.5dp"
+        android:padding="5dp"
+        android:background="#eeeeee"
+        android:inputType="phone"
+        android:gravity="center_horizontal"
+        android:hint="Phone Number"
+        android:drawableLeft="@drawable/ic_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
