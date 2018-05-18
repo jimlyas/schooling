@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <LinearLayout
-            android:elevation="5dp"
+            android:elevation="2.5dp"
             android:id="@+id/main_layout_add_subject"
             android:background="@android:color/white"
             android:orientation="vertical"
@@ -46,7 +46,7 @@
 
 
         <LinearLayout
-            android:elevation="5dp"
+            android:elevation="2.5dp"
             android:id="@+id/other_layout_add_subject"
             android:layout_marginTop="25dp"
             android:background="@android:color/white"
@@ -91,13 +91,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <EditText
+                    android:focusable="false"
+                    android:clickable="true"
                     android:onClick="open_dialog"
                     android:editable="false"
                     android:id="@+id/input_subject_teacher"
                     android:hint="Teacher's name"
                     android:padding="10dp"
                     android:background="@android:color/transparent"
-                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -105,7 +106,7 @@
 
         <LinearLayout
             android:padding="5dp"
-            android:elevation="5dp"
+            android:elevation="2.5dp"
             android:layout_marginTop="25dp"
             android:background="@android:color/white"
             android:layout_below="@id/other_layout_add_subject"
@@ -122,7 +123,7 @@
         </LinearLayout>
         <Button
             android:onClick="add_subject"
-            android:elevation="5dp"
+            android:elevation="2.5dp"
             android:textColor="#a4a4a4"
             android:background="@android:color/white"
             android:text="add"

@@ -14,8 +14,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import schooling.com.epizy.someone.schooling.fragments.home;
 import schooling.com.epizy.someone.schooling.fragments.schedule;
 import schooling.com.epizy.someone.schooling.fragments.subjects;
@@ -45,6 +48,10 @@ public class Home extends AppCompatActivity {
         setSupportActionBar(tb);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true); ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        View header = nv.getHeaderView(0);
+        TextView semester = header.findViewById(R.id.semester);
+        semester.setText(Html.fromHtml("6<sup>th</sup> semester  "));
 
         onClickNavigationView();
         settingDrawerLayout();
@@ -78,6 +85,7 @@ public class Home extends AppCompatActivity {
 
                     case  R.id.menu_profile:
                         startActivity(new Intent(Home.this, Profile.class));
+                        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                         break;
 
                     case R.id.menu_schedule:
@@ -89,6 +97,7 @@ public class Home extends AppCompatActivity {
                         nv.setCheckedItem(R.id.menu_subjects);
                         SelectedFragment = subjects.class;
                         break;
+
                     case R.id.menu_teachers:
                         nv.setCheckedItem(R.id.menu_teachers);
                         SelectedFragment = teachers.class;

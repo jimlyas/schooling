@@ -11,25 +11,37 @@
             android:title="Profile"/>
     </group>
 
-    <group android:id="@+id/menu_group_2">
-        <item
-            android:id="@+id/menu_schedule"
-            android:title="Schedule"
-            android:icon="@drawable/ic_schedule"/>
-        <item
-            android:id="@+id/menu_subjects"
-            android:title="Subjects"
-            android:icon="@drawable/ic_subjects"/>
-        <item
-            android:id="@+id/menu_teachers"
-            android:title="Teachers"
-            android:icon="@drawable/ic_teacher"/>
-    </group>
+    <item android:title="Features">
+        <menu>
+            <group android:id="@+id/menu_group_2">
+                <item
+                    android:id="@+id/menu_schedule"
+                    android:title="Schedule"
+                    android:icon="@drawable/ic_schedule"/>
+                <item
+                    android:id="@+id/menu_subjects"
+                    android:title="Subjects"
+                    android:icon="@drawable/ic_subjects"/>
+                <item
+                    android:id="@+id/menu_teachers"
+                    android:title="Teachers"
+                    android:icon="@drawable/ic_teacher"/>
+            </group>
+        </menu>
+    </item>
 
-    <group android:id="@+id/menu_group_3">
-        <item
-            android:id="@+id/menu_logout"
-            android:title="Logout"
-            android:icon="@drawable/ic_logout"/>
-    </group>
+    <item android:title="Others">
+        <menu>
+            <group android:id="@+id/menu_group_3">
+                <item
+                    android:id="@+id/menu_settings"
+                    android:title="Settings"
+                    android:icon="@drawable/ic_settings"/>
+                <item
+                    android:id="@+id/menu_logout"
+                    android:title="Logout"
+                    android:icon="@drawable/ic_logout"/>
+            </group>
+        </menu>
+    </item>
 </menu>
