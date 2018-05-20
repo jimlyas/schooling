@@ -5,4 +5,22 @@
     <color name="colorAccent">#e53935</color>
     <color name="red">#ef5350</color>
     <color name="blue">#42a5f5</color>
+
+    <color name="color_table_1">#007fe4</color>
+    <color name="color_table_2">#5B399E</color>
+    <color name="color_table_3">#FF9923</color>
+    <color name="color_table_4">#e63c23</color>
+    <color name="color_table_5">#f03158</color>
+    <color name="color_table_6">#1bc1ed</color>
+    <color name="color_table_7">#88d533</color>
+
+    <array name="colors_table">
+        <item>@color/color_table_1</item>
+        <item>@color/color_table_2</item>
+        <item>@color/color_table_3</item>
+        <item>@color/color_table_4</item>
+        <item>@color/color_table_5</item>
+        <item>@color/color_table_6</item>
+        <item>@color/color_table_7</item>
+    </array>
 </resources>
