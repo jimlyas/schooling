@@ -12,7 +12,7 @@ import schooling.com.epizy.someone.schooling.Model.teacher_model;
 import schooling.com.epizy.someone.schooling.R;
 
 public class teacher_adapter  extends RecyclerView.Adapter<teacher_adapter.viewholder>{
-    public Context context; List<teacher_model> list;
+    public Context context; private List<teacher_model> list;
 
     public teacher_adapter(Context context, List<teacher_model> model) {
         this.context = context;
@@ -51,7 +51,7 @@ public class teacher_adapter  extends RecyclerView.Adapter<teacher_adapter.viewh
 
     class viewholder extends RecyclerView.ViewHolder{
         TextView name, phone, initial;
-        public viewholder(View itemView) {
+        viewholder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.rec_teacher_name);
             phone = itemView.findViewById(R.id.rec_teacher_phone);

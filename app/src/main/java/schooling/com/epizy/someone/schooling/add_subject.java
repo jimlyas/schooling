@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import schooling.com.epizy.someone.schooling.Model.subject_model;
 
@@ -35,7 +36,7 @@ public class add_subject extends AppCompatActivity {
 
         setSupportActionBar(tb);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.ic_back);
     }
 
@@ -47,7 +48,7 @@ public class add_subject extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void add_subject(View view) {
+    public void adding(View view) {
         if(name.getText().toString().length()==0||room.getText().toString().length()==0||teacher.getText().toString().length()==0){
             Snackbar.make(findViewById(R.id.root_add_subject), "Fill all the data!", Snackbar.LENGTH_SHORT).show();
         }else if (database.add_subject(new subject_model(name.getText().toString(), room.getText().toString(), teacher.getText().toString(), note.getText().toString()))){

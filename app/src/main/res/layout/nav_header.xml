@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#e0e0e0"
     android:fitsSystemWindows="true"
     android:padding="10dp"
@@ -11,7 +12,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_marginTop="10dp"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:id="@+id/nav_profile_photo"
         app:civ_border_color="@android:color/black"
         app:civ_border_width="1dp"
@@ -22,7 +23,7 @@
     <LinearLayout
         android:layout_centerVertical="true"
         android:padding="10dp"
-        android:layout_toRightOf="@id/nav_profile_photo"
+        android:layout_toEndOf="@id/nav_profile_photo"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -47,6 +48,7 @@
             android:textSize="10sp"
             android:text="something"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="SmallSp" />
     </LinearLayout>
 </RelativeLayout>

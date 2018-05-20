@@ -1,8 +1,10 @@
 package schooling.com.epizy.someone.schooling.fragments;
 
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import schooling.com.epizy.someone.schooling.Adapter.teacher_adapter;
 import schooling.com.epizy.someone.schooling.DBHelper;
@@ -34,11 +37,11 @@ public class teachers extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.f_teachers, container, false);
         fab = v.findViewById(R.id.fab_teacher);
-        mdb = new MaterialDialog.Builder(this.getContext());
+        mdb = new MaterialDialog.Builder(Objects.requireNonNull(this.getContext()));
         database = new DBHelper(this.getContext());
         rc = v.findViewById(R.id.rc_teacher);
         list = new ArrayList<>();
@@ -52,7 +55,7 @@ public class teachers extends Fragment {
     }
 
     private void setupDialog() {
-        final View v = getLayoutInflater().inflate(R.layout.d_add_teacher, null);
+        @SuppressLint("InflateParams") final View v = getLayoutInflater().inflate(R.layout.d_add_teacher, null);
         final TextView input_name = v.findViewById(R.id.input_name_teacher);
         final TextView input_phone = v.findViewById(R.id.input_phone_teacher);
         mdb.title("Add Teacher").customView(v, false).positiveText("Add").negativeText("Cancel");

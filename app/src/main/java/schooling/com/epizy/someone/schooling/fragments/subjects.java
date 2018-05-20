@@ -13,8 +13,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -56,7 +54,7 @@ public class subjects extends Fragment {
         rc.setAdapter(adapter);
 
         initSwipe(rc, v);
-        setupfloating();
+        setupFloatingButton();
 
         return v;
     }
@@ -86,7 +84,7 @@ public class subjects extends Fragment {
         helper.attachToRecyclerView(rc);
     }
 
-    private void setupfloating() {
+    private void setupFloatingButton() {
         fab.setImageResource(R.drawable.ic_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

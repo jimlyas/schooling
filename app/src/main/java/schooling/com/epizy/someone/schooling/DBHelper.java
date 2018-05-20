@@ -10,17 +10,17 @@ import schooling.com.epizy.someone.schooling.Model.subject_model;
 import schooling.com.epizy.someone.schooling.Model.teacher_model;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public Context context; SQLiteDatabase database;
-    public static final String database_name = "school.db";
-    public static final String teacher_table = "teacher";
-    public static final String teacher_column_one = "name";
-    public static final String teacher_column_two = "phone";
+    public Context context; private SQLiteDatabase database;
+    private static final String database_name = "school.db";
+    private static final String teacher_table = "teacher";
+    private static final String teacher_column_one = "name";
+    private static final String teacher_column_two = "phone";
 
-    public static final String subject_table = "subject";
-    public static final String subject_column_one = "name";
-    public static final String subject_column_two = "room";
-    public static final String subject_column_three = "teacher";
-    public static final String subject_column_four = "note";
+    private static final String subject_table = "subject";
+    private static final String subject_column_one = "name";
+    private static final String subject_column_two = "room";
+    private static final String subject_column_three = "teacher";
+    private static final String subject_column_four = "note";
 
     public DBHelper(Context context) {
         super(context, database_name, null, 1);
@@ -50,11 +50,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(teacher_column_one, model.name);
         values.put(teacher_column_two, model.phone);
         long result = database.insert(teacher_table, null, values);
-        if(result==-1){
-            return false;
-        }else{
-            return  true;
-        }
+
+        return result != -1;
     }
 
     public void data_teachers(List<teacher_model> list){
@@ -64,6 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
             current.setId(String.valueOf(cursor.getInt(0)));
             list.add(current);
         }
+        cursor.close();
     }
 
     public void teachers_name(List<String> list){
@@ -71,6 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             list.add(cursor.getString(0));
         }
+        cursor.close();
     }
 
     public boolean add_subject(subject_model model){
@@ -80,11 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(subject_column_three, model.teacher);
         values.put(subject_column_four, model.note);
         long result = database.insert(subject_table, null, values);
-        if(result==-1){
-            return false;
-        }else{
-            return true;
-        }
+        return result != -1;
     }
 
     public void data_subjects(List<subject_model> list){
@@ -94,7 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
             current.setId(String.valueOf(cursor.getInt(0)));
             list.add(current);
         }
-
+        cursor.close();
     }
 
     public boolean deletesubject(String name){

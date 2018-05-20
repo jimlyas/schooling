@@ -12,9 +12,10 @@
         android:background="@android:color/transparent"
         android:gravity="center_horizontal"
         android:hint="Full Name"
-        android:drawableLeft="@drawable/ic_user"
+        android:drawableStart="@drawable/ic_user"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName" />
     <EditText
         android:id="@+id/input_phone_teacher"
         android:layout_margin="2.5dp"
@@ -23,7 +24,7 @@
         android:inputType="phone"
         android:gravity="center_horizontal"
         android:hint="Phone Number"
-        android:drawableLeft="@drawable/ic_phone"
+        android:drawableStart="@drawable/ic_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

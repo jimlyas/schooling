@@ -19,6 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import java.util.Objects;
+
 import schooling.com.epizy.someone.schooling.fragments.home;
 import schooling.com.epizy.someone.schooling.fragments.schedule;
 import schooling.com.epizy.someone.schooling.fragments.subjects;
@@ -47,7 +50,7 @@ public class Home extends AppCompatActivity {
 
         setSupportActionBar(tb);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true); ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true); ab.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         View header = nv.getHeaderView(0);
         TextView semester = header.findViewById(R.id.semester);
@@ -58,11 +61,11 @@ public class Home extends AppCompatActivity {
     }
 
     private void settingDrawerLayout() {
-        abdt = setupadbt();
+        abdt = setupActionBarDrawer();
         dl.addDrawerListener(abdt);
     }
 
-    private ActionBarDrawerToggle setupadbt() {
+    private ActionBarDrawerToggle setupActionBarDrawer() {
         return new ActionBarDrawerToggle(this, dl, tb, R.string.drawer_open, R.string.drawer_close);
     }
 
@@ -105,7 +108,7 @@ public class Home extends AppCompatActivity {
                 }
 
                 try{
-                    fr = (Fragment) SelectedFragment.newInstance();
+                    fr = (Fragment) Objects.requireNonNull(SelectedFragment).newInstance();
                     fm.beginTransaction().replace(R.id.content_home, fr).commit();
                     tb.setTitle(item.getTitle());
                 }catch (Exception e){

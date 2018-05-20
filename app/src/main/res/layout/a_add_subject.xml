@@ -26,7 +26,8 @@
             android:orientation="vertical"
             android:layout_below="@id/toolbar_add_subject"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:targetApi="lollipop">
 
             <EditText
                 android:id="@+id/input_subject_name"
@@ -35,7 +36,8 @@
                 android:hint="Add subject's name"
                 android:singleLine="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
 
             <View
                 android:background="#eeeeee"
@@ -53,7 +55,8 @@
             android:layout_below="@id/main_layout_add_subject"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:targetApi="lollipop">
 
             <LinearLayout
                 android:padding="5dp"
@@ -64,7 +67,8 @@
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_location"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:contentDescription="icon_location" />
                 <EditText
                     android:id="@+id/input_subject_room"
                     android:hint="Room"
@@ -72,7 +76,8 @@
                     android:background="@android:color/transparent"
                     android:singleLine="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
             </LinearLayout>
 
             <View
@@ -89,7 +94,9 @@
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_user"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:contentDescription="icon_user" />
+
                 <EditText
                     android:focusable="false"
                     android:clickable="true"
@@ -100,7 +107,8 @@
                     android:padding="10dp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName" />
             </LinearLayout>
         </LinearLayout>
 
@@ -112,8 +120,11 @@
             android:layout_below="@id/other_layout_add_subject"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:targetApi="lollipop">
+
             <EditText
+                android:inputType="text"
                 android:id="@+id/input_subject_note"
                 android:hint="Add a note"
                 android:padding="10dp"
@@ -122,13 +133,14 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <Button
-            android:onClick="add_subject"
+            android:onClick="adding"
             android:elevation="2.5dp"
             android:textColor="#a4a4a4"
             android:background="@android:color/white"
             android:text="add"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:targetApi="lollipop" />
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
