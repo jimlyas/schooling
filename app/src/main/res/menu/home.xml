@@ -34,9 +34,9 @@
         <menu>
             <group android:id="@+id/menu_group_3">
                 <item
-                    android:id="@+id/menu_settings"
-                    android:title="Settings"
-                    android:icon="@drawable/ic_settings"/>
+                    android:id="@+id/menu_code"
+                    android:title="Open Source Libraries"
+                    android:icon="@drawable/ic_code"/>
                 <item
                     android:id="@+id/menu_logout"
                     android:title="Logout"

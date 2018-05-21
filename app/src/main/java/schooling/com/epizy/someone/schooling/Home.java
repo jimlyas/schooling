@@ -23,6 +23,7 @@ import android.widget.TextView;
 import java.util.Objects;
 
 import schooling.com.epizy.someone.schooling.fragments.home;
+import schooling.com.epizy.someone.schooling.fragments.open_source;
 import schooling.com.epizy.someone.schooling.fragments.schedule;
 import schooling.com.epizy.someone.schooling.fragments.subjects;
 import schooling.com.epizy.someone.schooling.fragments.teachers;
@@ -104,6 +105,11 @@ public class Home extends AppCompatActivity {
                     case R.id.menu_teachers:
                         nv.setCheckedItem(R.id.menu_teachers);
                         SelectedFragment = teachers.class;
+                        break;
+
+                    case  R.id.menu_code:
+                        nv.setCheckedItem(R.id.menu_teachers);
+                        SelectedFragment = open_source.class;
                         break;
                 }
 

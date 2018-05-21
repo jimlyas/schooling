@@ -53,35 +53,9 @@ public class subjects extends Fragment {
         adapter = new subject_adapter(this.getContext(), list);
         rc.setAdapter(adapter);
 
-        initSwipe(rc, v);
         setupFloatingButton();
 
         return v;
-    }
-
-    private void initSwipe(RecyclerView rc, final View v) {
-        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int index = viewHolder.getAdapterPosition();
-                subject_model current = adapter.getItem(index);
-
-                if(direction==ItemTouchHelper.LEFT||direction==ItemTouchHelper.RIGHT){
-                    if(database.deletesubject(current.name)){
-                        adapter.removeItem(index);
-                        Snackbar.make(v.findViewById(R.id.root_f_subject), "Subject Deleted!", Snackbar.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        };
-
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(rc);
     }
 
     private void setupFloatingButton() {

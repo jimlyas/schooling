@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_add_schedule"
+    android:background="#eeeeee"
+    android:layout_margin="0dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".add_schedule">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:layout_alignParentTop="true"
+            app:titleTextColor="@android:color/white"
+            app:title="Add to timetable"
+            android:id="@+id/toolbar_add_schedule"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:elevation="2.5dp"
+            android:id="@+id/main_layout_add_schedule"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:layout_below="@id/toolbar_add_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:targetApi="lollipop">
+
+            <EditText
+                android:editable="false"
+                android:focusable="false"
+                android:clickable="true"
+                android:onClick="name_dialog"
+                android:id="@+id/add_schedule_subject_name"
+                android:background="@android:color/transparent"
+                android:padding="15dp"
+                android:hint="Select subject's name"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+
+            <View
+                android:background="#eeeeee"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"/>
+
+            <EditText
+                android:editable="false"
+                android:focusable="false"
+                android:clickable="true"
+                android:onClick="type_dialog"
+                android:id="@+id/add_schedule_subject_type"
+                android:background="@android:color/transparent"
+                android:padding="15dp"
+                android:hint="Select timetable's type"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:elevation="2.5dp"
+            android:id="@+id/other_layout_add_schedule"
+            android:layout_marginTop="25dp"
+            android:background="@android:color/white"
+            android:layout_below="@id/main_layout_add_schedule"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:targetApi="lollipop">
+
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="icon_date" />
+
+
+                <EditText
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:onClick="day_dialog"
+                    android:id="@+id/add_schedule_day"
+                    android:hint="Pick a day"
+                    android:padding="10dp"
+                    android:background="@android:color/transparent"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <View
+                android:background="#eeeeee"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"/>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="icon_schedule" />
+
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:onClick="startTime_dialog"
+                    android:id="@+id/add_schedule_start_time"
+                    android:hint="Pick a time"
+                    android:layout_gravity="center_vertical"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:padding="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View
+                android:background="#eeeeee"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"/>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:tint="@android:color/white"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="icon_schedule" />
+
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="End  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/add_schedule_end_time"
+                    android:onClick="endTime_dialog"
+                    android:hint="Pick a time"
+                    android:layout_gravity="center_vertical"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:padding="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <Button
+            android:onClick="add"
+            android:elevation="2.5dp"
+            android:textColor="#757575"
+            android:background="@android:color/white"
+            android:text="add"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:targetApi="lollipop"/>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

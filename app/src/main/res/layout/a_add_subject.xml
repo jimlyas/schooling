@@ -19,6 +19,7 @@
             android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
         <LinearLayout
             android:elevation="2.5dp"
             android:id="@+id/main_layout_add_subject"
@@ -135,7 +136,7 @@
         <Button
             android:onClick="adding"
             android:elevation="2.5dp"
-            android:textColor="#a4a4a4"
+            android:textColor="#757575"
             android:background="@android:color/white"
             android:text="add"
             android:layout_alignParentBottom="true"

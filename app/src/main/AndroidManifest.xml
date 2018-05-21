@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="schooling.com.epizy.someone.schooling">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon_app_round"
@@ -18,8 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Profile" android:theme="@style/Theme.Design.Light.NoActionBar" />
-        <activity android:name=".add_subject" android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".Profile"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".add_subject"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".browser"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity android:name=".add_schedule" android:theme="@style/Theme.Design.Light.NoActionBar"/>
     </application>
 
 </manifest>

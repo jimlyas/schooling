@@ -25,6 +25,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
     implementation 'com.github.EunsilJo:TimeTable:1.0'
+    implementation 'com.wdullaer:materialdatetimepicker:3.6.0'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:animated-vector-drawable:27.1.1'
     implementation 'com.android.support:percent:27.1.1'

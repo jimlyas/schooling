@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.List;
 import schooling.com.epizy.someone.schooling.Model.subject_model;
 import schooling.com.epizy.someone.schooling.Model.teacher_model;
+import schooling.com.epizy.someone.schooling.Model.timetable_model;
 
 public class DBHelper extends SQLiteOpenHelper {
     public Context context; private SQLiteDatabase database;
@@ -22,6 +23,14 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String subject_column_three = "teacher";
     private static final String subject_column_four = "note";
 
+    private static final String schedule_table = "schedule";
+    private static final String schedule_column_one = "name";
+    private static final String schedule_column_two = "type";
+    private static final String schedule_column_three = "day";
+    private static final String schedule_column_four = "startTime";
+    private static final String schedule_column_five = "endTime";
+
+
     public DBHelper(Context context) {
         super(context, database_name, null, 1);
         this.context = context;
@@ -29,6 +38,8 @@ public class DBHelper extends SQLiteOpenHelper {
         database.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50), phone varchar(15))");
         database.execSQL("create table if not exists "+subject_table+" (id integer primary key autoincrement," +
                 " name varchar(50), room varchar(10), teacher varchar(50), note varchar(100))");
+        database.execSQL("create table if not exists "+schedule_table+"(id integer primary key autoincrement, name varchar(50), type varchar(50), day varchar(50)" +
+                ", startTime varchar(5), endTime varchar(5))");
     }
 
     @Override
@@ -36,12 +47,15 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50), phone varchar(15))");
         sqLiteDatabase.execSQL("create table if not exists "+subject_table+" (id integer primary key autoincrement," +
                 " name varchar(50), room varchar(10), teacher varchar(50), note varchar(100))");
+        sqLiteDatabase.execSQL("create table if not exists "+schedule_table+"(id integer primary key autoincrement, name varchar(50), type varchar(50), day varchar(50)" +
+                ", startTime varchar(5), endTime varchar(5))");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("drop table if exists "+teacher_table);
         sqLiteDatabase.execSQL("drop table if exists "+subject_table);
+        sqLiteDatabase.execSQL("drop table if exists "+schedule_table);
         onCreate(sqLiteDatabase);
     }
 
@@ -92,7 +106,40 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
     }
 
+    public void subject_name(List<String> list){
+        Cursor cursor = this.getReadableDatabase().rawQuery("select name from "+subject_table, null);
+        while (cursor.moveToNext()){
+            list.add(cursor.getString(0));
+        }
+        cursor.close();
+    }
+
     public boolean deletesubject(String name){
         return database.delete(subject_table, subject_column_one+"=\""+name+"\"", null)>0;
+    }
+
+    public boolean add_timetable(timetable_model model){
+        ContentValues values = new ContentValues();
+        values.put(schedule_column_one, model.name);
+        values.put(schedule_column_two, model.type);
+        values.put(schedule_column_three, model.day);
+        values.put(schedule_column_four, model.jamawal);
+        values.put(schedule_column_five, model.jamakhir);
+        long result = database.insert(schedule_table, null, values);
+        return result != -1;
+    }
+
+    public void data_timetable(List<timetable_model> list){
+        Cursor cursor = this.getReadableDatabase().rawQuery("select * from "+schedule_table, null);
+        while (cursor.moveToNext()){
+            timetable_model current = new timetable_model(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+            current.setId(String.valueOf(cursor.getInt(0)));
+            list.add(current);
+        }
+        cursor.close();
+    }
+
+    public boolean deleteTimetable(String name){
+        return database.delete(schedule_table, schedule_column_one+"=\""+name+"\"", null)>0;
     }
 }
