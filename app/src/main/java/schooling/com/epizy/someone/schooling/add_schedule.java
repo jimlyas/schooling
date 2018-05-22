@@ -1,6 +1,8 @@
 package schooling.com.epizy.someone.schooling;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,13 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
-
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class add_schedule extends AppCompatActivity{
     DBHelper db; ArrayList<String> subject_name; ArrayList<String> days_name;
@@ -30,7 +30,7 @@ public class add_schedule extends AppCompatActivity{
         tb = findViewById(R.id.toolbar_add_schedule);
         setSupportActionBar(tb);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true); ab.setHomeAsUpIndicator(R.drawable.ic_back);
+        Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true); ab.setHomeAsUpIndicator(R.drawable.ic_back);
         initTimeDialog();
 
         subject_name = new ArrayList<>();
@@ -52,6 +52,7 @@ public class add_schedule extends AppCompatActivity{
 
     private void initTimeDialog() {
         StartDialog = TimePickerDialog.newInstance(new TimePickerDialog.OnTimeSetListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
                 ((EditText)findViewById(R.id.add_schedule_start_time)).setText(hourOfDay+":"+minute);
@@ -59,6 +60,7 @@ public class add_schedule extends AppCompatActivity{
         }, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), true);
 
         EndDialog = TimePickerDialog.newInstance(new TimePickerDialog.OnTimeSetListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
                 ((EditText)findViewById(R.id.add_schedule_end_time)).setText(hourOfDay+":"+minute);
@@ -73,14 +75,29 @@ public class add_schedule extends AppCompatActivity{
     }
 
     public void add(View view) {
-        Intent back = new Intent();
-        back.putExtra("name", ((EditText)findViewById(R.id.add_schedule_subject_name)).getText().toString());
-        back.putExtra("type", ((EditText)findViewById(R.id.add_schedule_subject_type)).getText().toString());
-        back.putExtra("day", ((EditText)findViewById(R.id.add_schedule_day)).getText().toString());
-        back.putExtra("start", ((EditText)findViewById(R.id.add_schedule_start_time)).getText().toString());
-        back.putExtra("end", ((EditText)findViewById(R.id.add_schedule_end_time)).getText().toString());
-        setResult(RESULT_OK, back);
-        finish();
+        String name = ((EditText)findViewById(R.id.add_schedule_subject_name)).getText().toString();
+        String type = ((EditText)findViewById(R.id.add_schedule_subject_type)).getText().toString();
+        String day = ((EditText)findViewById(R.id.add_schedule_day)).getText().toString();
+        String start = ((EditText)findViewById(R.id.add_schedule_start_time)).getText().toString();
+        String end = ((EditText)findViewById(R.id.add_schedule_end_time)).getText().toString();
+        if(name.length()==0||type.length()==0||day.length()==0|start.length()==0||end.length()==0){
+            Snackbar.make(findViewById(R.id.root_add_schedule), "Fill all the form!", Snackbar.LENGTH_SHORT).show();
+        }else{
+            String [] st = start.split(":");
+            String [] et = end.split(":");
+            if(Integer.valueOf(st[0])>Integer.valueOf(et[0])){
+                Snackbar.make(findViewById(R.id.root_add_schedule), "There's something wrong with the time!", Snackbar.LENGTH_SHORT).show();
+            }else{
+                Intent back = new Intent();
+                back.putExtra("name", name);
+                back.putExtra("type", type);
+                back.putExtra("day", day);
+                back.putExtra("start", start);
+                back.putExtra("end", end);
+                setResult(RESULT_OK, back);
+                finish();
+            }
+        }
     }
 
     public void name_dialog(View view) {

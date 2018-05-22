@@ -114,17 +114,17 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
     }
 
-    public boolean deletesubject(String name){
-        return database.delete(subject_table, subject_column_one+"=\""+name+"\"", null)>0;
-    }
+//    public boolean deletesubject(String name){
+//        return database.delete(subject_table, subject_column_one+"=\""+name+"\"", null)>0;
+//    }
 
     public boolean add_timetable(timetable_model model){
         ContentValues values = new ContentValues();
         values.put(schedule_column_one, model.name);
         values.put(schedule_column_two, model.type);
         values.put(schedule_column_three, model.day);
-        values.put(schedule_column_four, model.jamawal);
-        values.put(schedule_column_five, model.jamakhir);
+        values.put(schedule_column_four, model.start_Hour);
+        values.put(schedule_column_five, model.end_Hour);
         long result = database.insert(schedule_table, null, values);
         return result != -1;
     }
@@ -139,7 +139,17 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
     }
 
-    public boolean deleteTimetable(String name){
-        return database.delete(schedule_table, schedule_column_one+"=\""+name+"\"", null)>0;
+    public int getTimeTableId(String The_name, String The_type){
+        int id = 0;
+        Cursor cursor = this.getReadableDatabase().rawQuery("select id from "+schedule_table+" where name='"+The_name+"' and type='"+The_type+"'", null);
+        while (cursor.moveToNext()){
+            id = cursor.getInt(0);
+        }
+        cursor.close();
+        return id;
+    }
+
+    public boolean deleteTimetable(int number){
+        return database.delete(schedule_table, "id="+number+"", null)>0;
     }
 }

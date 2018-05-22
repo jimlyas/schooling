@@ -66,12 +66,18 @@ public class teachers extends Fragment {
                 super.onPositive(dialog);
                 String name = input_name.getText().toString();
                 String phone = input_phone.getText().toString();
-                if(database.add_teacher(new teacher_model(name, phone))){
-                    list.add(new teacher_model(name, phone)); adapter.notifyDataSetChanged();
-                    Toast.makeText(teachers.this.getContext(), "Teacher Added!", Toast.LENGTH_SHORT).show();
+
+                if(name.length()==0||phone.length()==0){
+                    if(database.add_teacher(new teacher_model(name, phone))){
+                        list.add(new teacher_model(name, phone)); adapter.notifyDataSetChanged();
+                        Toast.makeText(teachers.this.getContext(), "Teacher Added!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(teachers.this.getContext(), "Adding teacher failed!", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
-                    Toast.makeText(teachers.this.getContext(), "Adding teacher failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(teachers.this.getContext(), "Fill all the fields!", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override

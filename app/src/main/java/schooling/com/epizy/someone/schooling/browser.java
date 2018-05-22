@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.Objects;
+
 public class browser extends AppCompatActivity {
     Toolbar tb; WebView wb; ProgressDialog pd;
     @Override
@@ -23,7 +25,7 @@ public class browser extends AppCompatActivity {
 
         setSupportActionBar(tb);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.ic_clear);
 
         initWeb();

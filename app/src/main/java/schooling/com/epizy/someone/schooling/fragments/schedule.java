@@ -1,6 +1,7 @@
 package schooling.com.epizy.someone.schooling.fragments;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,10 +22,8 @@ import com.github.eunsiljo.timetablelib.view.TimeTableView;
 import com.github.eunsiljo.timetablelib.viewholder.TimeTableItemViewHolder;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import schooling.com.epizy.someone.schooling.DBHelper;
 import schooling.com.epizy.someone.schooling.Model.timetable_model;
@@ -65,7 +64,6 @@ public class schedule extends Fragment {
         fab.setImageResource(R.drawable.ic_add);
         tableData = new ArrayList<>();
         listModel = new ArrayList<>();
-        db.data_timetable(listModel);
 
         initTimeTable();
 
@@ -82,10 +80,12 @@ public class schedule extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==0&&resultCode==RESULT_OK){
-            Toast.makeText(this.getContext(), data.getStringExtra("type"), Toast.LENGTH_SHORT).show();
+
             if(db.add_timetable(new timetable_model(data.getStringExtra("name"), data.getStringExtra("type"), data.getStringExtra("day"), data.getStringExtra("start"), data.getStringExtra("end")))){
-                listModel.add(new timetable_model(data.getStringExtra("name"), data.getStringExtra("type"), data.getStringExtra("day"), data.getStringExtra("start"), data.getStringExtra("end")));
-                ++row;
+                timetable_model newest = new timetable_model(data.getStringExtra("name"), data.getStringExtra("type"), data.getStringExtra("day"), data.getStringExtra("start"), data.getStringExtra("end"));
+                newest.setId(String.valueOf(db.getTimeTableId(newest.name, newest.type)));
+                listModel.add(newest);
+
                 if(data.getStringExtra("type").equals("Praktikum")){
                     colorData = R.color.color_table_3;
                 }else{
@@ -98,31 +98,31 @@ public class schedule extends Fragment {
                 long endHour = cur.plusHours(Integer.valueOf(end[0])).plusMinutes(Integer.valueOf(end[1])).getMillis();
                 switch (data.getStringExtra("day")){
                     case "Monday":
-                        mon.add(new TimeData(0, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
+                        mon.add(new TimeData(row, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
                         tableData.set(0, new TimeTableData(days[0], mon));
                         break;
                     case "Tuesday":
-                        tue.add(new TimeData(0, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
+                        tue.add(new TimeData(row, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
                         tableData.set(1, new TimeTableData(days[1], tue));
                         break;
                     case "Wednesday":
-                        wed.add(new TimeData(0, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
+                        wed.add(new TimeData(row, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
                         tableData.set(2, new TimeTableData(days[2], wed));
                         break;
                     case "Thursday":
-                        thu.add(new TimeData(0, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
+                        thu.add(new TimeData(row, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
                         tableData.set(3, new TimeTableData(days[3], thu));
                         break;
                     case "Friday":
-                        fri.add(new TimeData(0, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
+                        fri.add(new TimeData(row, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
                         tableData.set(4, new TimeTableData(days[4], fri));
                         break;
                     case "Saturday":
-                        sat.add(new TimeData(0, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
+                        sat.add(new TimeData(row, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
                         tableData.set(5, new TimeTableData(days[5], sat));
                         break;
                 }
-
+                ++row;
                 timetable.setTimeTable(today, tableData);
 
             }else{
@@ -140,36 +140,104 @@ public class schedule extends Fragment {
         timetable.setStartHour(6);
         timetable.setShowHeader(true);
         timetable.setTableMode(TimeTableView.TableMode.SHORT);
-        tableData = getTimeTableData(today, days);
+        getTimeTableData(today, days);
         timetable.setTimeTable(today, tableData);
-        final View v = getLayoutInflater().inflate(R.layout.d_timetable, null);
+        @SuppressLint("InflateParams") final View v = getLayoutInflater().inflate(R.layout.d_timetable, null);
         timetable.setOnTimeItemClickListener(new TimeTableItemViewHolder.OnTimeItemClickListener() {
             @Override
-            public void onTimeItemClick(View view, int i, TimeGridData timeGridData) {
-                TimeData data = timeGridData.getTime();
-                timetable_model current = listModel.get((int) data.getKey());
-                ((TextView)v.findViewById(R.id.d_start_hour)).setText(current.jamawal);
-                ((TextView)v.findViewById(R.id.d_end_hour)).setText(current.jamakhir);
+            public void onTimeItemClick(View view, int i, final TimeGridData timeGridData) {
+                final TimeData data = timeGridData.getTime();
+                final timetable_model current = listModel.get((int) data.getKey());
+                ((TextView)v.findViewById(R.id.d_start_hour)).setText(current.start_Hour);
+                ((TextView)v.findViewById(R.id.d_end_hour)).setText(current.end_Hour);
                 ((TextView)v.findViewById(R.id.d_type)).setText(current.type);
-                MaterialDialog.Builder mdb = new MaterialDialog.Builder(schedule.this.getContext());
-                mdb.title(data.getTitle()).customView(v, true).negativeText("Close");
+                ((TextView)v.findViewById(R.id.d_date)).setText(current.day);
+                final MaterialDialog.Builder mdb = new MaterialDialog.Builder(Objects.requireNonNull(schedule.this.getContext()));
+                mdb.title(data.getTitle()).customView(v, true).negativeText("Close").positiveText("Delete");
+                mdb.callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        if(db.deleteTimetable(Integer.valueOf(current.id))){
+                            switch (current.day){
+                                case "Monday":
+                                    for(TimeData newest : mon){
+                                        if(newest.getKey().equals(data.getKey())&&newest.getTitle().equals(data.getTitle())&&newest.getColorRes()==data.getColorRes()){
+                                            mon.remove(newest);
+                                            break;
+                                        }
+                                    }
+                                    tableData.set(0, new TimeTableData(days[0], mon));
+                                    break;
+                                case "Tuesday":
+                                    for(TimeData newest : tue){
+                                        if(newest.getKey().equals(data.getKey())&&newest.getTitle().equals(data.getTitle())&&newest.getColorRes()==data.getColorRes()){
+                                            tue.remove(newest);
+                                            break;
+                                        }
+                                    }
+                                    tableData.set(1, new TimeTableData(days[1], tue));
+                                    break;
+                                case "Wednesday":
+                                    for(TimeData newest : wed){
+                                        if(newest.getKey().equals(data.getKey())&&newest.getTitle().equals(data.getTitle())&&newest.getColorRes()==data.getColorRes()){
+                                            wed.remove(newest);
+                                            break;
+                                        }
+                                    }
+                                    tableData.set(2, new TimeTableData(days[2], wed));
+                                    break;
+                                case "Thursday":
+                                    for(TimeData newest : thu){
+                                        if(newest.getKey().equals(data.getKey())&&newest.getTitle().equals(data.getTitle())&&newest.getColorRes()==data.getColorRes()){
+                                            thu.remove(newest);
+                                            break;
+                                        }
+                                    }
+                                    tableData.set(3, new TimeTableData(days[3], thu));
+                                    break;
+                                case "Friday":
+                                    for(TimeData newest : fri){
+                                        if(newest.getKey().equals(data.getKey())&&newest.getTitle().equals(data.getTitle())&&newest.getColorRes()==data.getColorRes()){
+                                            fri.remove(newest);
+                                            break;
+                                        }
+                                    }
+                                    tableData.set(4, new TimeTableData(days[4], fri));
+                                    break;
+                                case "Saturday":
+                                    for(TimeData newest : sat){
+                                        if(newest.getKey().equals(data.getKey())&&newest.getTitle().equals(data.getTitle())&&newest.getColorRes()==data.getColorRes()){
+                                            sat.remove(newest);
+                                            break;
+                                        }
+                                    }
+                                    tableData.set(5, new TimeTableData(days[5], sat));
+                                    break;
+                            }
+                            timetable.setTimeTable(today, tableData);
+                        }else{
+                            Toast.makeText(schedule.this.getContext(), "Delete Failed!", Toast.LENGTH_SHORT).show();
+                        }
+                        super.onPositive(dialog);
+                    }
+                });
                 mdb.build().show();
             }
         });
 
     }
 
-    private ArrayList<TimeTableData> getTimeTableData(long today, String[] days) {
+    private void getTimeTableData(long today, String[] days) {
         DateTime awal = new DateTime(today);
-
+        db.data_timetable(listModel);
         for(timetable_model model : listModel){
             if(model.type.equals("Praktikum")){
                 colorData = R.color.color_table_3;
             }else{
                 colorData = R.color.color_table_1;
             }
-            String [] start = model.jamawal.split(":");
-            String [] end = model.jamakhir.split(":");
+            String [] start = model.start_Hour.split(":");
+            String [] end = model.end_Hour.split(":");
             long startHour = awal.plusHours(Integer.valueOf(start[0])).plusMinutes(Integer.valueOf(start[1])).getMillis();
             long endHour = awal.plusHours(Integer.valueOf(end[0])).plusMinutes(Integer.valueOf(end[1])).getMillis();
             switch (model.day){
@@ -204,13 +272,5 @@ public class schedule extends Fragment {
         tables.add(new TimeTableData(days[5], sat));
 
         tableData.addAll(tables);
-        return  tableData;
     }
-
-    private long getmillis(String s) {
-        DateTime baru = DateTimeFormat.forPattern("HH:mm:ss").parseDateTime(s);
-        Log.w("Time Tables : ",String.valueOf(baru.getMillis()));
-        return  baru.getMillis();
-    }
-
 }

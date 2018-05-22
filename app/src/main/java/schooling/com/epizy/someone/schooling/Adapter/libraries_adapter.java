@@ -17,7 +17,7 @@ import schooling.com.epizy.someone.schooling.R;
 import schooling.com.epizy.someone.schooling.browser;
 
 public class libraries_adapter  extends RecyclerView.Adapter<libraries_adapter.ViewHolder>{
-    private Context context; List<library_source> list;
+    private Context context; private List<library_source> list;
 
     public libraries_adapter(Context context, List<library_source> list) {
         this.context = context;
@@ -44,7 +44,7 @@ public class libraries_adapter  extends RecyclerView.Adapter<libraries_adapter.V
 
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView name; Button button;
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.library_name);
             button = itemView.findViewById(R.id.button_library);

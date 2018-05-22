@@ -30,7 +30,7 @@ import schooling.com.epizy.someone.schooling.fragments.teachers;
 
 public class Home extends AppCompatActivity {
     Toolbar tb; FrameLayout fl; DrawerLayout dl; CoordinatorLayout cl; NavigationView nv;
-    FragmentManager fm; ActionBarDrawerToggle abdt;
+    FragmentManager fm; ActionBarDrawerToggle ActionBarDrawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +62,8 @@ public class Home extends AppCompatActivity {
     }
 
     private void settingDrawerLayout() {
-        abdt = setupActionBarDrawer();
-        dl.addDrawerListener(abdt);
+        ActionBarDrawer = setupActionBarDrawer();
+        dl.addDrawerListener(ActionBarDrawer);
     }
 
     private ActionBarDrawerToggle setupActionBarDrawer() {
@@ -129,19 +129,19 @@ public class Home extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        abdt.syncState();
+        ActionBarDrawer.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
-        abdt.onConfigurationChanged(newConfig);
+        ActionBarDrawer.onConfigurationChanged(newConfig);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(abdt.onOptionsItemSelected(item)){
+        if(ActionBarDrawer.onOptionsItemSelected(item)){
             dl.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);

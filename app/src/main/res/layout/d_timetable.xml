@@ -25,17 +25,33 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <TextView
+        android:padding="5dp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_date"
+        android:id="@+id/d_date"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="Days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:padding="5dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:text="From "
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:contentDescription="icon_hour"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_schedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_gravity="center_vertical"
             android:id="@+id/d_start_hour"
             android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -43,11 +59,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_gravity="center_vertical"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text=" To "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_gravity="center_vertical"
             android:id="@+id/d_end_hour"
             android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -55,4 +73,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
 </LinearLayout>
