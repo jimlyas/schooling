@@ -32,6 +32,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_main"
+            app:backgroundTint="@color/colorPrimary"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_add"
+            android:layout_gravity="end|bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView

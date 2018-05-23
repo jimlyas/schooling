@@ -33,7 +33,7 @@ import schooling.com.epizy.someone.schooling.add_schedule;
 import static android.app.Activity.RESULT_OK;
 
 public class schedule extends Fragment {
-    TimeTableView timetable; FloatingActionButton fab;
+    TimeTableView timetable;
     String [] days = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     long today = 0; DBHelper db; int colorData = 0; int row = 0;
     private static DateTime now = DateTime.now();
@@ -60,26 +60,17 @@ public class schedule extends Fragment {
         timetable = v.findViewById(R.id.timetable_view);
 
         db = new DBHelper(this.getContext());
-        fab = v.findViewById(R.id.fab_schedule);
-        fab.setImageResource(R.drawable.ic_add);
         tableData = new ArrayList<>();
         listModel = new ArrayList<>();
 
         initTimeTable();
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(new Intent(schedule.this.getContext(), add_schedule.class), 0);
-            }
-        });
 
         return v;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==0&&resultCode==RESULT_OK){
+        if(requestCode==2&&resultCode==RESULT_OK){
 
             if(db.add_timetable(new timetable_model(data.getStringExtra("name"), data.getStringExtra("type"), data.getStringExtra("day"), data.getStringExtra("start"), data.getStringExtra("end")))){
                 timetable_model newest = new timetable_model(data.getStringExtra("name"), data.getStringExtra("type"), data.getStringExtra("day"), data.getStringExtra("start"), data.getStringExtra("end"));

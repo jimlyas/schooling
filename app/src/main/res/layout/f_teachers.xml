@@ -15,12 +15,4 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_teacher"
-            android:background="#e53935"
-            android:layout_margin="15dp"
-            android:layout_gravity="bottom|end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
 </android.support.design.widget.CoordinatorLayout>

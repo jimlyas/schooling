@@ -27,9 +27,7 @@ import schooling.com.epizy.someone.schooling.Model.teacher_model;
 import schooling.com.epizy.someone.schooling.R;
 
 public class teachers extends Fragment {
-    final OvershootInterpolator oi = new OvershootInterpolator();
-    FloatingActionButton fab; boolean fab_clicked = true;
-    MaterialDialog.Builder mdb; DBHelper database; RecyclerView rc;
+    public MaterialDialog.Builder mdb; DBHelper database; RecyclerView rc;
     ArrayList<teacher_model> list; teacher_adapter adapter;
     public teachers() {
         // Required empty public constructor
@@ -40,7 +38,6 @@ public class teachers extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.f_teachers, container, false);
-        fab = v.findViewById(R.id.fab_teacher);
         mdb = new MaterialDialog.Builder(Objects.requireNonNull(this.getContext()));
         database = new DBHelper(this.getContext());
         rc = v.findViewById(R.id.rc_teacher);
@@ -49,8 +46,8 @@ public class teachers extends Fragment {
         adapter = new teacher_adapter(this.getContext(), list);
         rc.setHasFixedSize(true); rc.setLayoutManager(new LinearLayoutManager(this.getContext()));
         rc.setAdapter(adapter);
+
         setupDialog();
-        setupFloating();
         return v;
     }
 
@@ -58,7 +55,7 @@ public class teachers extends Fragment {
         @SuppressLint("InflateParams") final View v = getLayoutInflater().inflate(R.layout.d_add_teacher, null);
         final TextView input_name = v.findViewById(R.id.input_name_teacher);
         final TextView input_phone = v.findViewById(R.id.input_phone_teacher);
-        mdb.title("Add Teacher").customView(v, false).positiveText("Add").negativeText("Cancel");
+        mdb.title("Add Teacher").customView(v, false).positiveText("Add").negativeText("Cancel").autoDismiss(true);
 
         mdb.callback(new MaterialDialog.ButtonCallback() {
             @Override
@@ -67,7 +64,8 @@ public class teachers extends Fragment {
                 String name = input_name.getText().toString();
                 String phone = input_phone.getText().toString();
 
-                if(name.length()==0||phone.length()==0){
+
+                if(!name.matches("")||!phone.matches("")){
                     if(database.add_teacher(new teacher_model(name, phone))){
                         list.add(new teacher_model(name, phone)); adapter.notifyDataSetChanged();
                         Toast.makeText(teachers.this.getContext(), "Teacher Added!", Toast.LENGTH_SHORT).show();
@@ -89,25 +87,7 @@ public class teachers extends Fragment {
         mdb.dismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                dialogInterface.dismiss(); fab.performClick();
                 input_name.setText(null); input_phone.setText(null);
-            }
-        });
-    }
-
-    private void setupFloating() {
-        fab.setImageResource(R.drawable.ic_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(fab_clicked){
-                    fab_clicked = false;
-                    ViewCompat.animate(fab).rotation(135f).withLayer().setDuration(300).setInterpolator(oi).start();
-                    mdb.show();
-                }else{
-                    fab_clicked = true;
-                    ViewCompat.animate(fab).rotation(0f).withLayer().setDuration(300).setInterpolator(oi).start();
-                }
             }
         });
     }

@@ -27,7 +27,7 @@ import schooling.com.epizy.someone.schooling.add_subject;
 import static android.app.Activity.RESULT_OK;
 
 public class subjects extends Fragment {
-    FloatingActionButton fab;MaterialDialog.Builder mdb; DBHelper database; RecyclerView rc;
+    MaterialDialog.Builder mdb; DBHelper database; RecyclerView rc;
     ArrayList<subject_model> list; subject_adapter adapter;
     public subjects() {
         // Required empty public constructor
@@ -39,7 +39,6 @@ public class subjects extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.f_subjects, container, false);
-        fab = v.findViewById(R.id.fab_subject);
         mdb = new MaterialDialog.Builder(Objects.requireNonNull(this.getContext()));
         database = new DBHelper(this.getContext());
         rc = v.findViewById(R.id.rc_subject);
@@ -51,24 +50,13 @@ public class subjects extends Fragment {
         adapter = new subject_adapter(this.getContext(), list);
         rc.setAdapter(adapter);
 
-        setupFloatingButton();
 
         return v;
     }
 
-    private void setupFloatingButton() {
-        fab.setImageResource(R.drawable.ic_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(new Intent(subjects.this.getContext(), add_subject.class), 0);
-            }
-        });
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==0&&resultCode==RESULT_OK){
+        if(requestCode==1&&resultCode==RESULT_OK){
             list.add(new subject_model(data.getStringExtra("name"), data.getStringExtra("room"), data.getStringExtra("teacher"), data.getStringExtra("note")));
             adapter.notifyDataSetChanged();
         }else{
