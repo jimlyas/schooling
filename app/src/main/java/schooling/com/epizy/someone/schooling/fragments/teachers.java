@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -42,19 +43,30 @@ public class teachers extends Fragment {
         database = new DBHelper(this.getContext());
         rc = v.findViewById(R.id.rc_teacher);
         list = new ArrayList<>();
-        database.data_teachers(list);
-        adapter = new teacher_adapter(this.getContext(), list);
+
         rc.setHasFixedSize(true); rc.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        rc.setAdapter(adapter);
+
 
         setupDialog();
         return v;
     }
 
+    @Override
+    public void onStart() {
+        if (!list.isEmpty()){
+            list.clear(); database.data_teachers(list);
+        }else{
+            database.data_teachers(list);
+        }
+        adapter = new teacher_adapter(this.getContext(), list);
+        rc.setAdapter(adapter);
+        super.onStart();
+    }
+
     private void setupDialog() {
         @SuppressLint("InflateParams") final View v = getLayoutInflater().inflate(R.layout.d_add_teacher, null);
-        final TextView input_name = v.findViewById(R.id.input_name_teacher);
-        final TextView input_phone = v.findViewById(R.id.input_phone_teacher);
+        final EditText input_name = v.findViewById(R.id.input_name_teacher);
+        final EditText input_phone = v.findViewById(R.id.input_phone_teacher);
         mdb.title("Add Teacher").customView(v, false).positiveText("Add").negativeText("Cancel").autoDismiss(true);
 
         mdb.callback(new MaterialDialog.ButtonCallback() {
@@ -67,7 +79,9 @@ public class teachers extends Fragment {
 
                 if(!name.matches("")||!phone.matches("")){
                     if(database.add_teacher(new teacher_model(name, phone))){
-                        list.add(new teacher_model(name, phone)); adapter.notifyDataSetChanged();
+                        teacher_model newest = new teacher_model(name, phone);
+                        newest.setId(String.valueOf(database.getTeacherId(newest.name)));
+                        list.add(newest); adapter.notifyDataSetChanged();
                         Toast.makeText(teachers.this.getContext(), "Teacher Added!", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(teachers.this.getContext(), "Adding teacher failed!", Toast.LENGTH_SHORT).show();

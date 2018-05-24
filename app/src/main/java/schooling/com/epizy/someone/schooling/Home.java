@@ -75,7 +75,7 @@ public class Home extends AppCompatActivity {
                 switch (tb.getTitle().toString()){
                     case "Schedule": startActivityForResult(new Intent(Home.this, add_schedule.class), 2);
                         break;
-                    case "Subjects": startActivityForResult(new Intent(Home.this, add_subject.class), 1);
+                    case "Subjects": startActivityForResult(new Intent(Home.this, add_subject.class), 11);
                         break;
                     case "Teachers": TeacherFragment.mdb.show();
                         break;
@@ -84,18 +84,19 @@ public class Home extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("ResourceAsColor")
     private void initSnackBar() {
-        Closing = Snackbar.make(findViewById(R.id.root_coordinator_home), "Are you sure want to quit?", Snackbar.LENGTH_SHORT)
-                .setAction("YES, i want to quit", new View.OnClickListener() {
+        Closing = Snackbar.make(findViewById(R.id.root_coordinator_home), "Quit the app?", Snackbar.LENGTH_SHORT)
+                .setAction("YES!", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Closing.dismiss();
-                Snackbar.make(findViewById(R.id.root_coordinator_home), "You can't, use the logout menu to close the app", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.root_coordinator_home), "You can't, use the logout menu to close the app", Snackbar.LENGTH_LONG).show();
             }
         });
         Closing.setActionTextColor(Color.YELLOW);
         Closing.getView().setBackgroundColor(Color.LTGRAY);
-        ((TextView)Closing.getView().findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
+        ((TextView)Closing.getView().findViewById(android.support.design.R.id.snackbar_text)).setTextColor(R.color.colorPrimary);
     }
 
     private void settingDrawerLayout() {
@@ -144,7 +145,7 @@ public class Home extends AppCompatActivity {
                         break;
 
                     case  R.id.menu_code:
-                        nv.setCheckedItem(R.id.menu_teachers); fab.show();
+                        nv.setCheckedItem(R.id.menu_teachers); fab.hide();
                         fm.beginTransaction().replace(R.id.content_home, SourceFragment).commit();
                         break;
                 }
@@ -188,10 +189,16 @@ public class Home extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==1&&resultCode==RESULT_OK){
-            SubjectFragment.onActivityResult(1, RESULT_OK, data);
+        if(requestCode==11&&resultCode==RESULT_OK){
+            SubjectFragment.onActivityResult(requestCode, resultCode, data);
         }else if(requestCode==2&&resultCode==RESULT_OK){
             ScheduleFragment.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        intent.putExtra("RequestCode", String.valueOf(requestCode));
+        super.startActivityForResult(intent, requestCode);
     }
 }

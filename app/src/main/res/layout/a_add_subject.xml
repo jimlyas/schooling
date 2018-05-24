@@ -134,6 +134,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <Button
+            android:id="@+id/button_add_subject"
             android:onClick="adding"
             android:elevation="2.5dp"
             android:textColor="#757575"

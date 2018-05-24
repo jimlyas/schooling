@@ -35,20 +35,38 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, database_name, null, 1);
         this.context = context;
         database = this.getWritableDatabase();
-        database.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50), phone varchar(15))");
+        database.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50) unique not null, phone varchar(15) not null)");
         database.execSQL("create table if not exists "+subject_table+" (id integer primary key autoincrement," +
-                " name varchar(50), room varchar(10), teacher varchar(50), note varchar(100))");
+                " name varchar(50) unique not null, room varchar(10) not null, teacher varchar(50) not null, note varchar(100) not null, foreign key(teacher) references "+teacher_table+"(name)" +
+                " on update cascade)");
         database.execSQL("create table if not exists "+schedule_table+"(id integer primary key autoincrement, name varchar(50), type varchar(50), day varchar(50)" +
                 ", startTime varchar(5), endTime varchar(5))");
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50), phone varchar(15))");
+        sqLiteDatabase.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50) unique not null, phone varchar(15) not null)");
         sqLiteDatabase.execSQL("create table if not exists "+subject_table+" (id integer primary key autoincrement," +
-                " name varchar(50), room varchar(10), teacher varchar(50), note varchar(100))");
+                " name varchar(50) unique not null, room varchar(10) not null, teacher varchar(50) not null, note varchar(100) not null, foreign key(teacher) references "+teacher_table+"(name)" +
+                " on update cascade)");
         sqLiteDatabase.execSQL("create table if not exists "+schedule_table+"(id integer primary key autoincrement, name varchar(50), type varchar(50), day varchar(50)" +
                 ", startTime varchar(5), endTime varchar(5))");
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if(!db.isReadOnly()){
+            db.execSQL("PRAGMA foreign_keys=ON;");
+            db.setForeignKeyConstraintsEnabled(true);
+        }
+    }
+
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        db.execSQL("PRAGMA foreign_keys=ON;");
+        db.setForeignKeyConstraintsEnabled(true);
+        super.onConfigure(db);
     }
 
     @Override
@@ -64,6 +82,15 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(teacher_column_one, model.name);
         values.put(teacher_column_two, model.phone);
         long result = database.insert(teacher_table, null, values);
+
+        return result != -1;
+    }
+
+    public boolean update_teacher(teacher_model model){
+        ContentValues values = new ContentValues();
+        values.put(teacher_column_one, model.name);
+        values.put(teacher_column_two, model.phone);
+        long result = database.update(teacher_table, values, "id="+model.id, null);
 
         return result != -1;
     }
@@ -96,6 +123,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public boolean update_subject(subject_model model){
+        ContentValues values = new ContentValues();
+        values.put(subject_column_one, model.name);
+        values.put(subject_column_two, model.room);
+        values.put(subject_column_three, model.teacher);
+        values.put(subject_column_four, model.note);
+        long result = database.update(subject_table, values, "id="+Integer.valueOf(model.id), null);
+        return result != -1;
+    }
+
     public void data_subjects(List<subject_model> list){
         Cursor cursor = this.getReadableDatabase().rawQuery("select * from "+subject_table, null);
         while (cursor.moveToNext()){
@@ -114,9 +151,9 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
     }
 
-//    public boolean deletesubject(String name){
-//        return database.delete(subject_table, subject_column_one+"=\""+name+"\"", null)>0;
-//    }
+    public boolean deleteSubject(int index){
+        return database.delete(subject_table, "id="+index, null)>0;
+    }
 
     public boolean add_timetable(timetable_model model){
         ContentValues values = new ContentValues();
@@ -149,7 +186,31 @@ public class DBHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    public int getSubjectId(String The_name){
+        int id = 0;
+        Cursor cursor = this.getReadableDatabase().rawQuery("select id from "+subject_table+" where name='"+The_name+"'", null);
+        while (cursor.moveToNext()){
+            id = cursor.getInt(0);
+        }
+        cursor.close();
+        return id;
+    }
+
+    public int getTeacherId(String The_name){
+        int id = 0;
+        Cursor cursor = this.getReadableDatabase().rawQuery("select id from "+teacher_table+" where name='"+The_name+"'", null);
+        while (cursor.moveToNext()){
+            id = cursor.getInt(0);
+        }
+        cursor.close();
+        return id;
+    }
+
     public boolean deleteTimetable(int number){
         return database.delete(schedule_table, "id="+number+"", null)>0;
+    }
+
+    public boolean deleteTeacher(int number){
+        return database.delete(teacher_table, "id="+number+"", null)>0;
     }
 }

@@ -45,19 +45,32 @@ public class subjects extends Fragment {
         list = new ArrayList<>();
 
         rc.setHasFixedSize(true); rc.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        database.data_subjects(list);
-
-        adapter = new subject_adapter(this.getContext(), list);
-        rc.setAdapter(adapter);
-
-
         return v;
     }
 
     @Override
+    public void onStart() {
+        if(!list.isEmpty()){
+            list.clear();database.data_subjects(list);
+        }else{
+            database.data_subjects(list);
+        }
+        adapter = new subject_adapter(this.getContext(), list);
+        rc.setAdapter(adapter);
+        super.onStart();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==1&&resultCode==RESULT_OK){
-            list.add(new subject_model(data.getStringExtra("name"), data.getStringExtra("room"), data.getStringExtra("teacher"), data.getStringExtra("note")));
+        if(requestCode==11&&resultCode==RESULT_OK){
+            subject_model newest = new subject_model(data.getStringExtra("name"), data.getStringExtra("room"), data.getStringExtra("teacher"), data.getStringExtra("note"));
+            newest.setId(data.getStringExtra("id"));
+            list.add(newest);
+            adapter.notifyDataSetChanged();
+        }else if(requestCode==12&&resultCode==RESULT_OK){
+            subject_model newest = new subject_model(data.getStringExtra("name"), data.getStringExtra("room"), data.getStringExtra("teacher"), data.getStringExtra("note"));
+            newest.setId(data.getStringExtra("id"));
+            list.set(Integer.valueOf(data.getStringExtra("index")), newest);
             adapter.notifyDataSetChanged();
         }else{
             Toast.makeText(this.getContext(), "Add subject canceled!", Toast.LENGTH_SHORT).show();

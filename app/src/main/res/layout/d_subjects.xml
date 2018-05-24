@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:paddingBottom="7.6dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/d_subject_room"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_location"
+            android:text="Ruangan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/d_subject_teacher"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_user"
+            android:text="Dosen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView
+        android:gravity="center_vertical"
+        android:id="@+id/d_subject_note"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Note"
+        android:drawablePadding="5dp"
+        android:drawableStart="@drawable/ic_subjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

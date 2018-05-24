@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.ArrayList;
@@ -38,6 +39,15 @@ public class add_subject extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.ic_back);
+
+        if(getIntent().getStringExtra("RequestCode").equals("12")){
+            tb.setTitle("Edit subject's data");
+            ((Button)findViewById(R.id.button_add_subject)).setText("Edit");
+            name.setText(getIntent().getStringExtra("name"));
+            room.setText(getIntent().getStringExtra("room"));
+            note.setText(getIntent().getStringExtra("note"));
+            teacher.setText(getIntent().getStringExtra("teacher"));
+        }
     }
 
     @Override
@@ -49,18 +59,43 @@ public class add_subject extends AppCompatActivity {
     }
 
     public void adding(View view) {
-        if(name.getText().toString().length()==0||room.getText().toString().length()==0||teacher.getText().toString().length()==0){
-            Snackbar.make(findViewById(R.id.root_add_subject), "Fill all the data!", Snackbar.LENGTH_SHORT).show();
-        }else if (database.add_subject(new subject_model(name.getText().toString(), room.getText().toString(), teacher.getText().toString(), note.getText().toString()))){
-            Intent data = new Intent();
-            data.putExtra("name", name.getText().toString());
-            data.putExtra("room", room.getText().toString());
-            data.putExtra("teacher", teacher.getText().toString());
-            data.putExtra("note", note.getText().toString());
-            setResult(RESULT_OK, data);
-            finish();
+        String buttonType = tb.getTitle().toString();
+        if (buttonType.equals("Add Subject")){
+            if(name.getText().toString().length()==0||room.getText().toString().length()==0||teacher.getText().toString().length()==0){
+                Snackbar.make(findViewById(R.id.root_add_subject), "Fill all the data!", Snackbar.LENGTH_SHORT).show();
+            }else if (database.add_subject(new subject_model(name.getText().toString(), room.getText().toString(), teacher.getText().toString(), note.getText().toString()))){
+                Intent data = new Intent();
+                data.putExtra("name", name.getText().toString());
+                data.putExtra("room", room.getText().toString());
+                data.putExtra("teacher", teacher.getText().toString());
+                data.putExtra("note", note.getText().toString());
+                setResult(RESULT_OK, data);
+                finish();
+            }else{
+                Snackbar.make(findViewById(R.id.root_add_subject), "Adding subject failed!", Snackbar.LENGTH_SHORT).show();
+            }
+
         }else{
-            Snackbar.make(findViewById(R.id.root_add_subject), "Adding subject failed!", Snackbar.LENGTH_SHORT).show();
+            if(name.getText().toString().length()==0||room.getText().toString().length()==0||teacher.getText().toString().length()==0){
+                Snackbar.make(findViewById(R.id.root_add_subject), "Fill all the data!", Snackbar.LENGTH_SHORT).show();
+            }else {
+                subject_model newest = new subject_model(name.getText().toString(), room.getText().toString(), teacher.getText().toString(), note.getText().toString());
+                newest.setId(getIntent().getStringExtra("id"));
+                if(database.update_subject(newest)){
+                    Intent data = new Intent();
+                    data.putExtra("name", newest.name);
+                    data.putExtra("room", newest.room);
+                    data.putExtra("teacher", newest.teacher);
+                    data.putExtra("note", newest.note);
+                    data.putExtra("id", newest.id);
+                    data.putExtra("index", getIntent().getStringExtra("index"));
+                    setResult(RESULT_OK, data);
+                    finish();
+                }else{
+                    Snackbar.make(findViewById(R.id.root_add_subject), "Updating subject failed!", Snackbar.LENGTH_SHORT).show();
+                }
+
+            }
         }
     }
 
@@ -83,5 +118,11 @@ public class add_subject extends AppCompatActivity {
                 super.onNegative(dialog); dialog.dismiss();
             }
         }).alwaysCallSingleChoiceCallback().show();
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        intent.putExtra("RequestCode", requestCode);
+        super.startActivityForResult(intent, requestCode);
     }
 }
