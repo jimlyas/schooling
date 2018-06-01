@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"/>
 
         <LinearLayout
-            android:elevation="2.5dp"
+            android:elevation="0.5dp"
             android:id="@+id/main_layout_add_subject"
             android:background="@android:color/white"
             android:orientation="vertical"
@@ -49,7 +49,7 @@
 
 
         <LinearLayout
-            android:elevation="2.5dp"
+            android:elevation="0.5dp"
             android:id="@+id/other_layout_add_subject"
             android:layout_marginTop="25dp"
             android:background="@android:color/white"
@@ -115,7 +115,7 @@
 
         <LinearLayout
             android:padding="5dp"
-            android:elevation="2.5dp"
+            android:elevation="0.5dp"
             android:layout_marginTop="25dp"
             android:background="@android:color/white"
             android:layout_below="@id/other_layout_add_subject"
@@ -136,7 +136,7 @@
         <Button
             android:id="@+id/button_add_subject"
             android:onClick="adding"
-            android:elevation="2.5dp"
+            android:elevation="0.5dp"
             android:textColor="#757575"
             android:background="@android:color/white"
             android:text="add"

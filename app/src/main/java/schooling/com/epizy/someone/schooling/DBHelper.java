@@ -35,22 +35,23 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, database_name, null, 1);
         this.context = context;
         database = this.getWritableDatabase();
-        database.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50) unique not null, phone varchar(15) not null)");
+        //TODO[On Delete Default] buat kolom teacher di tabel subject belum berhasil
+        database.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50) unique, phone varchar(15) not null)");
         database.execSQL("create table if not exists "+subject_table+" (id integer primary key autoincrement," +
-                " name varchar(50) unique not null, room varchar(10) not null, teacher varchar(50) not null, note varchar(100) not null, foreign key(teacher) references "+teacher_table+"(name)" +
-                " on update cascade)");
+                " name varchar(50) unique not null, room varchar(10) not null, teacher varchar(50) default 'Not Defined', note varchar(100) not null, foreign key(teacher) references "+teacher_table+"(name)" +
+                " on update cascade on delete set null)");
         database.execSQL("create table if not exists "+schedule_table+"(id integer primary key autoincrement, name varchar(50), type varchar(50), day varchar(50)" +
-                ", startTime varchar(5), endTime varchar(5))");
+                ", startTime varchar(5), endTime varchar(5), foreign key (name) references "+subject_table+"(name) on update cascade on delete cascade)");
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50) unique not null, phone varchar(15) not null)");
+        sqLiteDatabase.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, name varchar(50) unique, phone varchar(15) not null)");
         sqLiteDatabase.execSQL("create table if not exists "+subject_table+" (id integer primary key autoincrement," +
-                " name varchar(50) unique not null, room varchar(10) not null, teacher varchar(50) not null, note varchar(100) not null, foreign key(teacher) references "+teacher_table+"(name)" +
-                " on update cascade)");
+                " name varchar(50) unique not null, room varchar(10) not null, teacher varchar(50) default 'Not Defined', note varchar(100) not null, foreign key(teacher) references "+teacher_table+"(name)" +
+                " on update cascade on delete set null)");
         sqLiteDatabase.execSQL("create table if not exists "+schedule_table+"(id integer primary key autoincrement, name varchar(50), type varchar(50), day varchar(50)" +
-                ", startTime varchar(5), endTime varchar(5))");
+                ", startTime varchar(5), endTime varchar(5), foreign key (name) references "+subject_table+"(name) on update cascade on delete cascade)");
     }
 
     @Override

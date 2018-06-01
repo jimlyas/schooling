@@ -35,6 +35,7 @@ public class libraries_adapter  extends RecyclerView.Adapter<libraries_adapter.V
         library_source current = list.get(position);
         holder.name.setText(current.name);
         holder.name.setTag(current.website);
+        holder.creator.setText("By "+ current.creator);
     }
 
     @Override
@@ -43,10 +44,11 @@ public class libraries_adapter  extends RecyclerView.Adapter<libraries_adapter.V
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView name; Button button;
+        TextView name, creator; Button button;
         ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.library_name);
+            creator = itemView.findViewById(R.id.library_creator);
             button = itemView.findViewById(R.id.button_library);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override

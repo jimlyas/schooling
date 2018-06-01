@@ -23,6 +23,7 @@ import com.github.eunsiljo.timetablelib.viewholder.TimeTableItemViewHolder;
 
 import org.joda.time.DateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 
 import schooling.com.epizy.someone.schooling.DBHelper;
@@ -66,6 +67,18 @@ public class schedule extends Fragment {
         initTimeTable();
 
         return v;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(!listModel.isEmpty()||!tableData.isEmpty()){
+            row = 0;
+            listModel.clear(); tableData.clear();
+            mon.clear(); tue.clear(); wed.clear();
+            thu.clear(); fri.clear(); sat.clear();
+            getTimeTableData(now.withTimeAtStartOfDay().getMillis(), days);
+        }
     }
 
     @Override
@@ -127,7 +140,6 @@ public class schedule extends Fragment {
 
     private void initTimeTable() {
         today = now.withTimeAtStartOfDay().getMillis();
-        Log.w("Date-nya", String.valueOf(today));
         timetable.setStartHour(6);
         timetable.setShowHeader(true);
         timetable.setTableMode(TimeTableView.TableMode.SHORT);
@@ -149,6 +161,7 @@ public class schedule extends Fragment {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         if(db.deleteTimetable(Integer.valueOf(current.id))){
+                            Toast.makeText(schedule.this.getContext(), "Delete Success", Toast.LENGTH_SHORT).show();
                             switch (current.day){
                                 case "Monday":
                                     for(TimeData newest : mon){
@@ -205,6 +218,7 @@ public class schedule extends Fragment {
                                     tableData.set(5, new TimeTableData(days[5], sat));
                                     break;
                             }
+                            listModel.remove(current);
                             timetable.setTimeTable(today, tableData);
                         }else{
                             Toast.makeText(schedule.this.getContext(), "Delete Failed!", Toast.LENGTH_SHORT).show();

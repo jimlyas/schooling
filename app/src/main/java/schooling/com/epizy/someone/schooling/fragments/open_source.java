@@ -40,10 +40,10 @@ public class open_source extends Fragment {
     }
 
     private void initData() {
-        list.add(new library_source("material-dialog", "https://github.com/afollestad/material-dialogs"));
-        list.add(new library_source("CircleImageView", "https://github.com/hdodenhof/CircleImageView"));
-        list.add(new library_source("TimeTable", "https://github.com/EunsilJo/TimeTable"));
-        list.add(new library_source("MaterialDateTimePicker", "https://github.com/wdullaer/MaterialDateTimePicker"));
+        list.add(new library_source("material-dialog", "https://github.com/afollestad/material-dialogs", "afollestad"));
+        list.add(new library_source("CircleImageView", "https://github.com/hdodenhof/CircleImageView", "hdodenhof"));
+        list.add(new library_source("TimeTable", "https://github.com/EunsilJo/TimeTable", "EunsilJo"));
+        list.add(new library_source("MaterialDateTimePicker", "https://github.com/wdullaer/MaterialDateTimePicker", "wdullaer"));
     }
 
 }
