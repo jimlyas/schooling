@@ -44,6 +44,7 @@ public class open_source extends Fragment {
         list.add(new library_source("CircleImageView", "https://github.com/hdodenhof/CircleImageView", "hdodenhof"));
         list.add(new library_source("TimeTable", "https://github.com/EunsilJo/TimeTable", "EunsilJo"));
         list.add(new library_source("MaterialDateTimePicker", "https://github.com/wdullaer/MaterialDateTimePicker", "wdullaer"));
+        list.add(new library_source("SmoothProgressBar", "https://github.com/castorflex/SmoothProgressBar", "castorflex"));
     }
 
 }
