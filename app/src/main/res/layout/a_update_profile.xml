@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#e0e0e0"
+    android:layout_width="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:focusedByDefault="true"
+    android:layout_height="match_parent"
+    tools:context=".activities.update_profile">
+
+    <FrameLayout
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/update_profile_image"
+            android:src="@drawable/user_placeholder"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:layout_margin="0dp"
+            android:id="@+id/open_cropper"
+            app:menu_fab_size="mini"
+            app:menu_colorNormal="@color/colorPrimaryDark"
+            app:menu_colorPressed="@color/colorPrimary"
+            android:layout_gravity="bottom|end"
+            app:menu_icon="@android:drawable/ic_menu_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:paddingStart="10dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="Tell us about yourself"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.TextInputLayout
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/update_name"
+                android:inputType="textPersonName"
+                android:hint="Your Name"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:padding="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:background="#e0e0e0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            app:hintAnimationEnabled="true"
+            android:textColorHint="@color/colorPrimaryDark"
+            app:hintEnabled="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/update_major"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:hint="Majoring in"
+                android:padding="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

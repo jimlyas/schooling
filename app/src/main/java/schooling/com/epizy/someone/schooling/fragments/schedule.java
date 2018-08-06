@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,13 +22,11 @@ import com.github.eunsiljo.timetablelib.viewholder.TimeTableItemViewHolder;
 
 import org.joda.time.DateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Objects;
 
 import schooling.com.epizy.someone.schooling.DBHelper;
-import schooling.com.epizy.someone.schooling.Model.timetable_model;
+import schooling.com.epizy.someone.schooling.models.timetable_model;
 import schooling.com.epizy.someone.schooling.R;
-import schooling.com.epizy.someone.schooling.add_schedule;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -86,6 +83,7 @@ public class schedule extends Fragment {
         if(requestCode==2&&resultCode==RESULT_OK){
 
             if(db.add_timetable(new timetable_model(data.getStringExtra("name"), data.getStringExtra("type"), data.getStringExtra("day"), data.getStringExtra("start"), data.getStringExtra("end")))){
+                Log.d("Database Operation :", "Adding timetable");
                 timetable_model newest = new timetable_model(data.getStringExtra("name"), data.getStringExtra("type"), data.getStringExtra("day"), data.getStringExtra("start"), data.getStringExtra("end"));
                 newest.setId(String.valueOf(db.getTimeTableId(newest.name, newest.type)));
                 listModel.add(newest);
@@ -100,6 +98,8 @@ public class schedule extends Fragment {
                 DateTime cur = new DateTime(today);
                 long startHour = cur.plusHours(Integer.valueOf(start[0])).plusMinutes(Integer.valueOf(start[1])).getMillis();
                 long endHour = cur.plusHours(Integer.valueOf(end[0])).plusMinutes(Integer.valueOf(end[1])).getMillis();
+
+                //Algorithm for inserting data to timetable
                 switch (data.getStringExtra("day")){
                     case "Monday":
                         mon.add(new TimeData(row, data.getStringExtra("name"), colorData, R.color.white, startHour, endHour));
@@ -146,6 +146,8 @@ public class schedule extends Fragment {
         getTimeTableData(today, days);
         timetable.setTimeTable(today, tableData);
         @SuppressLint("InflateParams") final View v = getLayoutInflater().inflate(R.layout.d_timetable, null);
+
+        //When TimeItem Clicked, it's show dialog which contain data and option to delete and update
         timetable.setOnTimeItemClickListener(new TimeTableItemViewHolder.OnTimeItemClickListener() {
             @Override
             public void onTimeItemClick(View view, int i, final TimeGridData timeGridData) {
@@ -162,6 +164,8 @@ public class schedule extends Fragment {
                     public void onPositive(MaterialDialog dialog) {
                         if(db.deleteTimetable(Integer.valueOf(current.id))){
                             Toast.makeText(schedule.this.getContext(), "Delete Success", Toast.LENGTH_SHORT).show();
+
+                            //Algorithm for deleting data from timetable
                             switch (current.day){
                                 case "Monday":
                                     for(TimeData newest : mon){

@@ -1,4 +1,4 @@
-package schooling.com.epizy.someone.schooling.Model;
+package schooling.com.epizy.someone.schooling.models;
 
 public class timetable_model {
     public String name, type, day, id, start_Hour, end_Hour;

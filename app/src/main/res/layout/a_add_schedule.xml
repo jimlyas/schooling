@@ -7,7 +7,7 @@
     android:layout_margin="0dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".add_schedule">
+    tools:context=".activities.add_schedule">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

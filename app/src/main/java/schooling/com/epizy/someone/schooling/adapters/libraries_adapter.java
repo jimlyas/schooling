@@ -1,4 +1,4 @@
-package schooling.com.epizy.someone.schooling.Adapter;
+package schooling.com.epizy.someone.schooling.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import schooling.com.epizy.someone.schooling.Model.library_source;
+import schooling.com.epizy.someone.schooling.models.library_source;
 import schooling.com.epizy.someone.schooling.R;
-import schooling.com.epizy.someone.schooling.browser;
+import schooling.com.epizy.someone.schooling.activities.browser;
 
 public class libraries_adapter  extends RecyclerView.Adapter<libraries_adapter.ViewHolder>{
     private Context context; private List<library_source> list;
@@ -44,13 +44,12 @@ public class libraries_adapter  extends RecyclerView.Adapter<libraries_adapter.V
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView name, creator; Button button;
+        TextView name, creator;
         ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.library_name);
             creator = itemView.findViewById(R.id.library_creator);
-            button = itemView.findViewById(R.id.button_library);
-            button.setOnClickListener(new View.OnClickListener() {
+            itemView.findViewById(R.id.root_rec_open_source).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent open_browser = new Intent(context, browser.class);

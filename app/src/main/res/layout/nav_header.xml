@@ -16,7 +16,6 @@
         android:id="@+id/nav_profile_photo"
         app:civ_border_color="@android:color/black"
         app:civ_border_width="1dp"
-        android:src="@drawable/eg_prof"
         android:layout_width="76dp"
         android:layout_height="76dp" />
 
@@ -31,7 +30,7 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:text="Jimly Asshiddiqy"
+            android:text="Not Defined"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -41,14 +40,5 @@
             android:text="Majoring in Information System"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <TextView
-            android:padding="4.5dp"
-            android:id="@+id/semester"
-            android:textStyle="italic"
-            android:textSize="10sp"
-            android:text="something"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="SmallSp" />
     </LinearLayout>
 </RelativeLayout>

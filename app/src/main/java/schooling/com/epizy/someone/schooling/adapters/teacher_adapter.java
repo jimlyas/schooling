@@ -1,4 +1,4 @@
-package schooling.com.epizy.someone.schooling.Adapter;
+package schooling.com.epizy.someone.schooling.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,7 +16,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.List;
 
 import schooling.com.epizy.someone.schooling.DBHelper;
-import schooling.com.epizy.someone.schooling.Model.teacher_model;
+import schooling.com.epizy.someone.schooling.models.teacher_model;
 import schooling.com.epizy.someone.schooling.R;
 
 public class teacher_adapter  extends RecyclerView.Adapter<teacher_adapter.ViewHolder>{

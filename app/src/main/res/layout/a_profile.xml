@@ -1,13 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.Profile">
+    <ImageView
+        android:alpha="0.76"
+        android:id="@+id/back_profile"
+        android:scaleType="fitXY"
+        android:src="@drawable/back"
+        android:background="#e0e0e0"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:contentDescription="TODO" />
 
-    <TextView
-        android:layout_centerInParent="true"
-        android:text="This is profile."
-        android:layout_width="wrap_content"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_profile"
+        app:civ_border_color="@android:color/black"
+        app:civ_border_width="1dp"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        app:layout_anchor="@id/back_profile"
+        android:src="@drawable/user_placeholder"
+        android:layout_width="125dp"
+        android:layout_height="125dp" />
+
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="Not Defined yet!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:layout_gravity="center_horizontal"
+            android:text="Not yet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:text="update"
+        android:background="@color/colorPrimaryDark"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-</RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

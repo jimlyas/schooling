@@ -1,7 +1,8 @@
-package schooling.com.epizy.someone.schooling;
+package schooling.com.epizy.someone.schooling.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +11,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
+
+import schooling.com.epizy.someone.schooling.DBHelper;
+import schooling.com.epizy.someone.schooling.R;
 
 public class add_schedule extends AppCompatActivity{
     DBHelper db; ArrayList<String> subject_name; ArrayList<String> days_name;
@@ -101,13 +107,39 @@ public class add_schedule extends AppCompatActivity{
     }
 
     public void name_dialog(View view) {
-        new MaterialDialog.Builder(this).title("Select a subject")
-                .items(subject_name).itemsCallback(new MaterialDialog.ListCallback() {
-            @Override
-            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                ((EditText)findViewById(R.id.add_schedule_subject_name)).setText(subject_name.get(position));
-            }
-        }).autoDismiss(true).negativeText("Cancel").show();
+        if (subject_name.size()>0){
+            new MaterialDialog.Builder(this).title("Select a subject")
+                    .items(subject_name).itemsCallback(new MaterialDialog.ListCallback() {
+                @Override
+                public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                    ((EditText)findViewById(R.id.add_schedule_subject_name)).setText(subject_name.get(position));
+                }
+            }).autoDismiss(true).negativeText("Cancel").show();
+        }else {
+            new MaterialDialog.Builder(this).title("Select a subject")
+                    .content("There is no subject data").autoDismiss(true)
+                    .positiveText("Add new subject").negativeText("Cancel").onPositive(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    startActivityForResult(new Intent(add_schedule.this, add_subject.class), 0);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }
+            }).onNegative(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    dialog.dismiss();
+                }
+            }).build().show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==0&&resultCode==RESULT_OK){
+            subject_name.clear();
+            db.subject_name(subject_name);
+        }
     }
 
     public void type_dialog(View view) {

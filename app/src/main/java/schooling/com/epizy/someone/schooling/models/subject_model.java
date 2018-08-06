@@ -1,4 +1,4 @@
-package schooling.com.epizy.someone.schooling.Model;
+package schooling.com.epizy.someone.schooling.models;
 
 public class subject_model {
     public String id, name, room, teacher, note;

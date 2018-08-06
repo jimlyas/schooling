@@ -5,26 +5,24 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import schooling.com.epizy.someone.schooling.Adapter.teacher_adapter;
+import schooling.com.epizy.someone.schooling.adapters.teacher_adapter;
 import schooling.com.epizy.someone.schooling.DBHelper;
-import schooling.com.epizy.someone.schooling.Model.teacher_model;
+import schooling.com.epizy.someone.schooling.models.teacher_model;
 import schooling.com.epizy.someone.schooling.R;
 
 public class teachers extends Fragment {
@@ -45,6 +43,7 @@ public class teachers extends Fragment {
         list = new ArrayList<>();
 
         rc.setHasFixedSize(true); rc.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        rc.addItemDecoration(new DividerItemDecoration(rc.getContext(), DividerItemDecoration.VERTICAL));
 
 
         setupDialog();
@@ -79,6 +78,7 @@ public class teachers extends Fragment {
 
                 if(!name.matches("")||!phone.matches("")){
                     if(database.add_teacher(new teacher_model(name, phone))){
+                        Log.d("Database Operation :", "Adding Teacher");
                         teacher_model newest = new teacher_model(name, phone);
                         newest.setId(String.valueOf(database.getTeacherId(newest.name)));
                         list.add(newest); adapter.notifyDataSetChanged();

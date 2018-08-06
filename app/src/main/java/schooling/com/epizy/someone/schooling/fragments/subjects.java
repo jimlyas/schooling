@@ -4,7 +4,6 @@ package schooling.com.epizy.someone.schooling.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,11 +17,10 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import schooling.com.epizy.someone.schooling.Adapter.subject_adapter;
+import schooling.com.epizy.someone.schooling.adapters.subject_adapter;
 import schooling.com.epizy.someone.schooling.DBHelper;
-import schooling.com.epizy.someone.schooling.Model.subject_model;
+import schooling.com.epizy.someone.schooling.models.subject_model;
 import schooling.com.epizy.someone.schooling.R;
-import schooling.com.epizy.someone.schooling.add_subject;
 
 import static android.app.Activity.RESULT_OK;
 

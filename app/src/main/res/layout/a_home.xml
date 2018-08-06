@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home">
+    tools:context=".activities.Home">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/root_coordinator_home"
@@ -32,18 +32,65 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_main"
-            app:backgroundTint="@color/colorPrimary"
-            android:layout_margin="15dp"
-            android:src="@drawable/ic_add"
-            android:layout_gravity="end|bottom"
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/fab_all"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="10dp"
+            app:menu_fab_size="normal"
+            app:menu_backgroundColor="@android:color/transparent"
+            app:menu_colorNormal="@color/colorPrimaryDark"
+            app:menu_colorPressed="@color/colorPrimary"
+            app:menu_labels_colorNormal="@color/colorPrimaryDark"
+            app:fab_colorPressed="@color/colorPrimary"
+            app:fab_colorRipple="#99FFFFFF"
+            app:menu_openDirection="up"
+            app:menu_showShadow="true"
+            app:menu_labels_position="left"
+            app:menu_labels_ellipsize="end"
+            app:menu_fab_hide_animation="@anim/fab_scale_down"
+            app:menu_fab_show_animation="@anim/fab_scale_up"
+            app:menu_labels_singleLine="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:onClick="ActionFromFAB"
+                android:id="@+id/fab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_teacher"
+                app:fab_colorNormal="@android:color/white"
+                app:fab_colorPressed="#212121"
+                app:fab_label="Add Teacher"
+                app:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:onClick="ActionFromFAB"
+                android:id="@+id/fab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_subjects"
+                app:fab_colorNormal="@android:color/white"
+                app:fab_colorPressed="#212121"
+                app:fab_label="Add Subject"
+                app:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:onClick="ActionFromFAB"
+                android:id="@+id/fab3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_schedule"
+                app:fab_colorNormal="@android:color/white"
+                app:fab_colorPressed="#212121"
+                app:fab_label="Add Schedule"
+                app:fab_size="mini" />
+
+        </com.github.clans.fab.FloatingActionMenu>
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
-        app:headerLayout="@layout/nav_header"
         android:id="@+id/nav_view"
         android:layout_gravity="start"
         app:menu="@menu/home"

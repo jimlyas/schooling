@@ -6,21 +6,21 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.List;
-import schooling.com.epizy.someone.schooling.Model.subject_model;
-import schooling.com.epizy.someone.schooling.Model.teacher_model;
-import schooling.com.epizy.someone.schooling.Model.timetable_model;
+import schooling.com.epizy.someone.schooling.models.subject_model;
+import schooling.com.epizy.someone.schooling.models.teacher_model;
+import schooling.com.epizy.someone.schooling.models.timetable_model;
 
 public class DBHelper extends SQLiteOpenHelper {
     public Context context; private SQLiteDatabase database;
     private static final String database_name = "school.db";
     private static final String teacher_table = "teacher";
-    private static final String teacher_column_one = "teachername";
+    private static final String teacher_column_one = "TeacherName";
     private static final String teacher_column_two = "phone";
 
     private static final String subject_table = "subject";
     private static final String subject_column_one = "name";
     private static final String subject_column_two = "room";
-    private static final String subject_column_three = "teachername";
+    private static final String subject_column_three = "TeacherName";
     private static final String subject_column_four = "note";
 
     private static final String schedule_table = "schedule";
@@ -35,21 +35,21 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, database_name, null, 1);
         this.context = context;
         database = this.getWritableDatabase();
-        //TODO[On Delete Default] buat kolom teacher di tabel subject belum berhasil
-        database.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, teachername varchar(50) unique, phone varchar(15) not null)");
+        //TODO[Database] After deletion of teacher's data, TeacherName in subject table is not set to default
+        database.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, TeacherName varchar(50) unique, phone varchar(15) not null)");
         database.execSQL("create table if not exists "+subject_table+" (id integer primary key autoincrement," +
-                " name varchar(50) unique not null, room varchar(10) not null, teachername varchar(50) default 'Not Defined', note varchar(100) not null, foreign key(teachername) references "+teacher_table+"(teachername)" +
-                " on update cascade on delete set null)");
+                " name varchar(50) unique not null, room varchar(10) not null, TeacherName varchar(50) default 'Not Defined', note varchar(100) not null, foreign key(TeacherName) references "+teacher_table+"(TeacherName)" +
+                " on update cascade on delete cascade)");
         database.execSQL("create table if not exists "+schedule_table+"(id integer primary key autoincrement, name varchar(50), type varchar(50), day varchar(50)" +
                 ", startTime varchar(5), endTime varchar(5), foreign key (name) references "+subject_table+"(name) on update cascade on delete cascade)");
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, teachername varchar(50) unique, phone varchar(15) not null)");
+        sqLiteDatabase.execSQL("create table if not exists "+teacher_table+" (id integer primary key autoincrement, TeacherName varchar(50) unique, phone varchar(15) not null)");
         sqLiteDatabase.execSQL("create table if not exists "+subject_table+" (id integer primary key autoincrement," +
-                " name varchar(50) unique not null, room varchar(10) not null, teachername varchar(50) default 'Not Defined', note varchar(100) not null, foreign key(teachername) references "+teacher_table+"(teachername)" +
-                " on update cascade on delete set null)");
+                " name varchar(50) unique not null, room varchar(10) not null, TeacherName varchar(50) default 'Not Defined', note varchar(100) not null, foreign key(TeacherName) references "+teacher_table+"(TeacherName)" +
+                " on update cascade on delete set default)");
         sqLiteDatabase.execSQL("create table if not exists "+schedule_table+"(id integer primary key autoincrement, name varchar(50), type varchar(50), day varchar(50)" +
                 ", startTime varchar(5), endTime varchar(5), foreign key (name) references "+subject_table+"(name) on update cascade on delete cascade)");
     }
@@ -65,9 +65,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
         db.execSQL("PRAGMA foreign_keys=ON;");
         db.setForeignKeyConstraintsEnabled(true);
-        super.onConfigure(db);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void teachers_name(List<String> list){
-        Cursor cursor = this.getReadableDatabase().rawQuery("select teachername from "+teacher_table, null);
+        Cursor cursor = this.getReadableDatabase().rawQuery("select TeacherName from "+teacher_table, null);
         while (cursor.moveToNext()){
             list.add(cursor.getString(0));
         }
@@ -199,7 +199,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public int getTeacherId(String The_name){
         int id = 0;
-        Cursor cursor = this.getReadableDatabase().rawQuery("select id from "+teacher_table+" where teachername='"+The_name+"'", null);
+        Cursor cursor = this.getReadableDatabase().rawQuery("select id from "+teacher_table+" where TeacherName='"+The_name+"'", null);
         while (cursor.moveToNext()){
             id = cursor.getInt(0);
         }

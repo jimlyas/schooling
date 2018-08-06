@@ -1,10 +1,11 @@
-package schooling.com.epizy.someone.schooling;
+package schooling.com.epizy.someone.schooling.activities;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import java.util.Objects;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
+import schooling.com.epizy.someone.schooling.R;
 
 public class browser extends AppCompatActivity {
     Toolbar tb; WebView wb; SmoothProgressBar spb;
@@ -50,8 +52,8 @@ public class browser extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 tb.setSubtitle(view.getUrl());
-                tb.setTitle(view.getTitle());
-                ((LinearLayout)findViewById(R.id.root_browser)).removeView(spb);
+                tb.setTitle(view.getTitle().replace("GitHub - ", ""));
+                ((LinearLayout)findViewById(R.id.linear_browser)).removeView(spb);
             }
 
         });
@@ -75,6 +77,7 @@ public class browser extends AppCompatActivity {
             ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData data = ClipData.newPlainText("Url-Link", tb.getSubtitle());
             clip.setPrimaryClip(data);
+            Snackbar.make(findViewById(R.id.root_browser), "Link copied!", Snackbar.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

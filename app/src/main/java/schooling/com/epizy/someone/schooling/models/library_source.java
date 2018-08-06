@@ -1,4 +1,4 @@
-package schooling.com.epizy.someone.schooling.Model;
+package schooling.com.epizy.someone.schooling.models;
 
 public class library_source {
     public String name, website, creator;

@@ -4,6 +4,7 @@ package schooling.com.epizy.someone.schooling.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +13,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import schooling.com.epizy.someone.schooling.Adapter.libraries_adapter;
-import schooling.com.epizy.someone.schooling.Model.library_source;
+import schooling.com.epizy.someone.schooling.adapters.libraries_adapter;
+import schooling.com.epizy.someone.schooling.models.library_source;
 import schooling.com.epizy.someone.schooling.R;
 
 public class open_source extends Fragment {
@@ -35,6 +36,7 @@ public class open_source extends Fragment {
         adapter = new libraries_adapter(this.getContext(), list);
         initData();
         rc.setHasFixedSize(true); rc.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        rc.addItemDecoration(new DividerItemDecoration(rc.getContext(), DividerItemDecoration.VERTICAL));
         rc.setAdapter(adapter);
         return v;
     }
@@ -45,6 +47,7 @@ public class open_source extends Fragment {
         list.add(new library_source("TimeTable", "https://github.com/EunsilJo/TimeTable", "EunsilJo"));
         list.add(new library_source("MaterialDateTimePicker", "https://github.com/wdullaer/MaterialDateTimePicker", "wdullaer"));
         list.add(new library_source("SmoothProgressBar", "https://github.com/castorflex/SmoothProgressBar", "castorflex"));
+        list.add(new library_source("FloatingActionButton", "https://github.com/Clans/FloatingActionButton", "Clans"));
+        list.add(new library_source("Android-Image-Cropper", "https://github.com/ArthurHub/Android-Image-Cropper", "ArthurHub"));
     }
-
 }

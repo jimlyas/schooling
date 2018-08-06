@@ -1,4 +1,4 @@
-package schooling.com.epizy.someone.schooling.Adapter;
+package schooling.com.epizy.someone.schooling.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,10 +17,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.List;
 
 import schooling.com.epizy.someone.schooling.DBHelper;
-import schooling.com.epizy.someone.schooling.Model.subject_model;
+import schooling.com.epizy.someone.schooling.models.subject_model;
 import schooling.com.epizy.someone.schooling.R;
-import schooling.com.epizy.someone.schooling.add_subject;
-import schooling.com.epizy.someone.schooling.fragments.subjects;
+import schooling.com.epizy.someone.schooling.activities.add_subject;
 
 public class subject_adapter  extends RecyclerView.Adapter<subject_adapter.ViewHolder>{
     public Context context; private List<subject_model> list;
@@ -103,6 +102,8 @@ public class subject_adapter  extends RecyclerView.Adapter<subject_adapter.ViewH
 
                         @Override
                         public void onNegative(MaterialDialog dialog) {
+                            //TODO[Confirmation] Ask confirmation when delete
+                            //That All the timetable for scheduled subject will also be deleted
                             if(database.deleteSubject(Integer.valueOf(current.id))){
                                 subject_adapter.this.removeItem(index);
                             }else{

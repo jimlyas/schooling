@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:orientation="vertical"
+    android:orientation="horizontal"
+    android:id="@+id/root_rec_open_source"
+    android:background="?attr/selectableItemBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
-        android:padding="10dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_weight="1"
             android:padding="2.5dp"
@@ -30,16 +28,4 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/button_library"
-            android:layout_gravity="center_vertical|end"
-            android:text="WEBSITE"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <View
-        android:background="#e0e0e0"
-        android:layout_width="match_parent"
-        android:layout_height="1.5dp"/>
 </LinearLayout>

@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/root_browser"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".browser">
-    <android.support.v7.widget.Toolbar
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Small"
-        android:id="@+id/toolbar_browser"
-        app:title=" "
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:titleTextColor="@android:color/white"
-        app:subtitleTextColor="@android:color/white"
-        android:background="@color/colorPrimary"
+    tools:context=".activities.browser">
+    <LinearLayout
+        android:id="@+id/linear_browser"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
-    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
-        android:id="@+id/ProgressBarBrowser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        app:spb_sections_count="5"
-        app:spb_color="#494949"
-        app:spb_speed="2.0"
-        app:spb_stroke_width="4dp"
-        app:spb_stroke_separator_length="2dp"
-        app:spb_reversed="false"
-        app:spb_progressiveStart_activated="true"
-        app:spb_progressiveStart_speed="1.5"
-        app:spb_progressiveStop_speed="3.0"/>
-    <WebView
-        android:id="@+id/web_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
-</LinearLayout>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Small"
+            android:id="@+id/toolbar_browser"
+            app:title=" "
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:titleTextColor="@android:color/white"
+            app:subtitleTextColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+        <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+            android:id="@+id/ProgressBarBrowser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:background="@android:color/transparent"
+            app:spb_sections_count="5"
+            app:spb_color="#494949"
+            app:spb_speed="2.0"
+            app:spb_stroke_width="4dp"
+            app:spb_stroke_separator_length="2dp"
+            app:spb_reversed="false"
+            app:spb_progressiveStart_activated="true"
+            app:spb_progressiveStart_speed="1.5"
+            app:spb_progressiveStop_speed="3.0"/>
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
