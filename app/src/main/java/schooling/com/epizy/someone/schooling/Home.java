@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import org.jraf.android.alibglitch.GlitchEffect;
+
 import java.util.Objects;
 import schooling.com.epizy.someone.schooling.fragments.home;
 import schooling.com.epizy.someone.schooling.fragments.open_source;
@@ -117,11 +121,18 @@ public class Home extends AppCompatActivity {
 
                     case R.id.menu_home:
                         nv.setCheckedItem(R.id.menu_home); fab.hide();
+                        Log.d("Transition Fragment :", "Home ");
                         fm.beginTransaction().replace(R.id.content_home, HomeFragment).commit();
                         break;
 
                     case R.id.menu_logout:
-                        Home.this.finish();
+                        GlitchEffect.showGlitch(Home.this);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Home.this.finish();
+                            }
+                        }, 500);
                         break;
 
                     case  R.id.menu_profile:
@@ -131,26 +142,32 @@ public class Home extends AppCompatActivity {
 
                     case R.id.menu_schedule:
                         nv.setCheckedItem(R.id.menu_schedule); fab.show();
+                        Log.d("Transition Fragment :", "Schedule ");
                         fm.beginTransaction().replace(R.id.content_home, ScheduleFragment).commit();
                         break;
 
                     case R.id.menu_subjects:
                         nv.setCheckedItem(R.id.menu_subjects); fab.show();
+                        Log.d("Transition Fragment :", "Subjects ");
                         fm.beginTransaction().replace(R.id.content_home, SubjectFragment).commit();
                         break;
 
                     case R.id.menu_teachers:
                         nv.setCheckedItem(R.id.menu_teachers); fab.show();
+                        Log.d("Transition Fragment :", "Teachers ");
                         fm.beginTransaction().replace(R.id.content_home, TeacherFragment).commit();
                         break;
 
                     case  R.id.menu_code:
                         nv.setCheckedItem(R.id.menu_teachers); fab.hide();
+                        Log.d("Transition Fragment :", "Open Source Libraries ");
                         fm.beginTransaction().replace(R.id.content_home, SourceFragment).commit();
                         break;
                 }
 
-                tb.setTitle(item.getTitle());
+                if(item.getItemId()!=R.id.menu_profile)
+                    tb.setTitle(item.getTitle());
+
                 return true;
             }
         });
@@ -159,14 +176,12 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
         ActionBarDrawer.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggles
         ActionBarDrawer.onConfigurationChanged(newConfig);
     }
 

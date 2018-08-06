@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ public class teachers extends Fragment {
 
                 if(!name.matches("")||!phone.matches("")){
                     if(database.add_teacher(new teacher_model(name, phone))){
+                        Log.d("Database Operation :", "Adding Teacher");
                         teacher_model newest = new teacher_model(name, phone);
                         newest.setId(String.valueOf(database.getTeacherId(newest.name)));
                         list.add(newest); adapter.notifyDataSetChanged();

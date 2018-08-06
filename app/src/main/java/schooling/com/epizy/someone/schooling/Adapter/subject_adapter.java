@@ -103,6 +103,8 @@ public class subject_adapter  extends RecyclerView.Adapter<subject_adapter.ViewH
 
                         @Override
                         public void onNegative(MaterialDialog dialog) {
+                            //TODO[Confirmation] Ask confirmation when delete
+                            //That All the timetable for scheduled subject will also be deleted
                             if(database.deleteSubject(Integer.valueOf(current.id))){
                                 subject_adapter.this.removeItem(index);
                             }else{

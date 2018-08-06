@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -64,6 +65,7 @@ public class add_subject extends AppCompatActivity {
             if(name.getText().toString().length()==0||room.getText().toString().length()==0||teacher.getText().toString().length()==0){
                 Snackbar.make(findViewById(R.id.root_add_subject), "Fill all the data!", Snackbar.LENGTH_SHORT).show();
             }else if (database.add_subject(new subject_model(name.getText().toString(), room.getText().toString(), teacher.getText().toString(), note.getText().toString()))){
+                Log.d("Database Operation :", "Adding Subject");
                 Intent data = new Intent();
                 data.putExtra("name", name.getText().toString());
                 data.putExtra("room", room.getText().toString());
@@ -82,6 +84,7 @@ public class add_subject extends AppCompatActivity {
                 subject_model newest = new subject_model(name.getText().toString(), room.getText().toString(), teacher.getText().toString(), note.getText().toString());
                 newest.setId(getIntent().getStringExtra("id"));
                 if(database.update_subject(newest)){
+                    Log.d("Database Operation :", "Updating subject's data");
                     Intent data = new Intent();
                     data.putExtra("name", newest.name);
                     data.putExtra("room", newest.room);
@@ -100,6 +103,7 @@ public class add_subject extends AppCompatActivity {
     }
 
     public void open_dialog(View view) {
+        //Create dialog content when there is no teacher data
         new MaterialDialog.Builder(this).title("Select a Teacher").items(nama).positiveText("Select").negativeText("Cancel")
                 .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
