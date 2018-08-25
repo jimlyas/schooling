@@ -37,6 +37,11 @@
                     android:id="@+id/menu_code"
                     android:title="Open Source Libraries"
                     android:icon="@drawable/ic_code"/>
+
+                <item
+                    android:id="@+id/menu_logout"
+                    android:title="Logout"
+                    android:icon="@drawable/ic_logout"/>
             </group>
         </menu>
     </item>

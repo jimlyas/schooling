@@ -1,8 +1,12 @@
 package schooling.com.epizy.someone.schooling.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +20,9 @@ import schooling.com.epizy.someone.schooling.R;
 
 public class update_profile extends AppCompatActivity {
     EditText name, major;
+    private SharedPreferences.Editor prefEditor;
+    static String uri_image = "something";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +44,19 @@ public class update_profile extends AppCompatActivity {
                         .start(update_profile.this);
             }
         });
+
+        SharedPreferences pref = getSharedPreferences("preferences", MODE_PRIVATE);
+        prefEditor = pref.edit();
+
+
+        if (pref.getBoolean("user", false)){
+            uri_image = pref.getString("PROFILE", null);
+            ((CircleImageView)findViewById(R.id.update_profile_image)).setImageURI(Uri.parse(pref.getString("PROFILE", null)));
+            name.setText(pref.getString("name", null));
+            major.setText(pref.getString("major", null));
+        }
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -45,8 +64,10 @@ public class update_profile extends AppCompatActivity {
         if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE&&resultCode==RESULT_OK){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             ((CircleImageView)findViewById(R.id.update_profile_image)).setImageURI(result.getUri());
+            Log.w("IMAGE UPDATED", "true");
+            uri_image = result.getUri().toString();
         }else {
-
+            Log.w("RESULT :", "No Image Selected!");
         }
     }
 
@@ -59,8 +80,17 @@ public class update_profile extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId()==R.id.menu_update_profile){
-            Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
-            finish();
+            if (name.getText().toString().length()==0||major.getText().toString().length()==0){
+                Toast.makeText(this, "There's empty field!", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
+                prefEditor.putBoolean("user", true);
+                prefEditor.putString("PROFILE", uri_image);
+                prefEditor.putString("name", name.getText().toString());
+                prefEditor.putString("major", major.getText().toString());
+                prefEditor.commit();
+                finish();
+            }
         }
         return super.onOptionsItemSelected(item);
     }

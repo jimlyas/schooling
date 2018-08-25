@@ -3,7 +3,9 @@ package schooling.com.epizy.someone.schooling.activities;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -22,12 +24,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionMenu;
 import org.jraf.android.alibglitch.GlitchEffect;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import schooling.com.epizy.someone.schooling.DBHelper;
 import schooling.com.epizy.someone.schooling.R;
 import schooling.com.epizy.someone.schooling.fragments.home;
@@ -43,15 +48,17 @@ public class Home extends AppCompatActivity {
     FloatingActionMenu fab_all;
     private static home HomeFragment = new home();
     private DBHelper database;
+    private SharedPreferences pref;
     private static schedule ScheduleFragment = new schedule();
     private subjects SubjectFragment = new subjects();
     private teachers TeacherFragment = new teachers();
     private open_source SourceFragment = new open_source();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_home);
-
+        pref = getSharedPreferences("preferences", MODE_PRIVATE);
         database = new DBHelper(this);
         tb = findViewById(R.id.toolbar);
         fl = findViewById(R.id.content_home);
@@ -64,18 +71,39 @@ public class Home extends AppCompatActivity {
         fm.beginTransaction().replace(R.id.content_home, HomeFragment).commit();
         fab_all.showMenu(true);
 
+
         setSupportActionBar(tb);
         ActionBar ab = getSupportActionBar();
         Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true); ab.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        if (getSharedPreferences("preferences", MODE_PRIVATE).getString("user",null)!=null){
-            nv.addHeaderView(View.inflate(this, R.layout.nav_header, nv));
-            //        View header = nv.getHeaderView(0);
+        nv.addHeaderView(getLayoutInflater().from(this).inflate(R.layout.nav_header, nv, false));
+        nv.getHeaderView(0).setVisibility(View.GONE);
+        if (pref.getBoolean("user", false)){
+            nv.getHeaderView(0).setVisibility(View.VISIBLE);
+            View header = nv.getHeaderView(0);
+            ((CircleImageView)header.findViewById(R.id.nav_profile_photo)).setImageURI(Uri.parse(pref.getString("PROFILE",null)));
+            ((TextView)header.findViewById(R.id.nav_name)).setText(pref.getString("name", "Not Defined"));
+            ((TextView)header.findViewById(R.id.nav_major)).setText(pref.getString("major", "Majoring in"));
         }
 
         onClickNavigationView();
         settingDrawerLayout();
         FloatingClicked();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (pref.getBoolean("user", false)){
+            nv.getHeaderView(0).setVisibility(View.VISIBLE);
+            View header = nv.getHeaderView(0);
+            ((CircleImageView)header.findViewById(R.id.nav_profile_photo)).setImageURI(Uri.parse(pref.getString("PROFILE",null)));
+            ((TextView)header.findViewById(R.id.nav_name)).setText(pref.getString("name", "Not Defined"));
+            ((TextView)header.findViewById(R.id.nav_major)).setText(pref.getString("major", "Majoring in"));
+        }else {
+            nv.getHeaderView(0).setVisibility(View.GONE);
+        }
+
     }
 
     private void FloatingClicked() {
@@ -125,7 +153,7 @@ public class Home extends AppCompatActivity {
                         break;
 
                     case  R.id.menu_profile:
-                        if (getSharedPreferences("preferences", MODE_PRIVATE).getString("user",null)==null){
+                        if (getSharedPreferences("preferences", MODE_PRIVATE).getString("PROFILE",null)==null){
                             startActivity(new Intent(Home.this, update_profile.class));
                         }else {
                             startActivity(new Intent(Home.this, Profile.class));
@@ -155,6 +183,12 @@ public class Home extends AppCompatActivity {
                         nv.setCheckedItem(R.id.menu_teachers); fab_all.hideMenu(true);
                         Log.d("Transition Fragment :", "Open Source Libraries ");
                         fm.beginTransaction().replace(R.id.content_home, SourceFragment).commit();
+                        break;
+
+                    case R.id.menu_logout:
+                        nv.setCheckedItem(R.id.menu_logout); fab_all.hideMenu(true);
+                        getSharedPreferences("preferences", MODE_PRIVATE).edit().clear().apply();
+                        nv.getHeaderView(0).setVisibility(View.GONE);
                         break;
                 }
 

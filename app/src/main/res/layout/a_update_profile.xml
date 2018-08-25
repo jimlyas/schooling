@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_update_profile"
     android:background="#e0e0e0"
     android:layout_width="match_parent"
     android:focusableInTouchMode="true"
@@ -37,58 +38,63 @@
 
     <LinearLayout
         android:layout_gravity="center_vertical"
-        android:background="@android:color/white"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:paddingStart="10dp"
-            android:paddingTop="15dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:padding="10dp"
             android:text="Tell us about yourself"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.design.widget.TextInputLayout
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            android:textColorHint="@color/colorPrimaryDark"
+        <LinearLayout
+            android:background="@android:color/white"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/update_name"
-                android:inputType="textPersonName"
-                android:hint="Your Name"
-                android:textColorHint="@color/colorPrimaryDark"
-                android:padding="10dp"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
 
-        <View
-            android:background="#e0e0e0"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-
-        <android.support.design.widget.TextInputLayout
-            app:hintAnimationEnabled="true"
-            android:textColorHint="@color/colorPrimaryDark"
-            app:hintEnabled="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/update_major"
-                android:inputType="textPersonName"
+            <android.support.design.widget.TextInputLayout
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
                 android:textColorHint="@color/colorPrimaryDark"
-                android:hint="Majoring in"
-                android:padding="10dp"
-                android:background="@android:color/transparent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_name"
+                    android:inputType="textPersonName"
+                    android:hint="Your Name"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:padding="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+
+            <View
+                android:background="#e0e0e0"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <android.support.design.widget.TextInputLayout
+                app:hintAnimationEnabled="true"
+                android:textColorHint="@color/colorPrimaryDark"
+                app:hintEnabled="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_major"
+                    android:inputType="textPersonName"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:hint="Majoring in"
+                    android:padding="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
     </LinearLayout>
+
 </android.support.design.widget.CoordinatorLayout>

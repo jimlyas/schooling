@@ -21,7 +21,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'com.getbase:floatingactionbutton:1.10.1'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
     implementation 'com.github.EunsilJo:TimeTable:1.0'
