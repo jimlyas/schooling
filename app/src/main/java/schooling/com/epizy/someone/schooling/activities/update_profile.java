@@ -1,9 +1,9 @@
 package schooling.com.epizy.someone.schooling.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +23,7 @@ public class update_profile extends AppCompatActivity {
     private SharedPreferences.Editor prefEditor;
     static String uri_image = "something";
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class update_profile extends AppCompatActivity {
                         .setCropShape(CropImageView.CropShape.RECTANGLE)
                         .setScaleType(CropImageView.ScaleType.CENTER_CROP)
                         .setActivityTitle("Crop Image")
-                        .setAutoZoomEnabled(false)
+                        .setAutoZoomEnabled(true)
                         .setAllowRotation(false)
                         .setAllowFlipping(false)
                         .start(update_profile.this);
@@ -56,7 +57,6 @@ public class update_profile extends AppCompatActivity {
             major.setText(pref.getString("major", null));
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -83,7 +83,6 @@ public class update_profile extends AppCompatActivity {
             if (name.getText().toString().length()==0||major.getText().toString().length()==0){
                 Toast.makeText(this, "There's empty field!", Toast.LENGTH_SHORT).show();
             }else {
-                Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
                 prefEditor.putBoolean("user", true);
                 prefEditor.putString("PROFILE", uri_image);
                 prefEditor.putString("name", name.getText().toString());

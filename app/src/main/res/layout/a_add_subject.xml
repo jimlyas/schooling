@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_add_subject"
     android:background="#eeeeee"
+    android:focusable="true"
+    android:focusedByDefault="true"
+    android:focusableInTouchMode="true"
     android:layout_margin="0dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.add_subject">
+    tools:context=".activities.add_subject"
+    tools:ignore="UnusedAttribute">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -38,7 +42,9 @@
                 android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:importantForAutofill="no"
+                tools:ignore="HardcodedText" />
 
             <View
                 android:background="#eeeeee"
@@ -69,7 +75,7 @@
                     android:src="@drawable/ic_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="icon_location" />
+                    tools:ignore="ContentDescription" />
                 <EditText
                     android:id="@+id/input_subject_room"
                     android:hint="Room"
@@ -78,7 +84,9 @@
                     android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:importantForAutofill="no"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
             <View
@@ -96,7 +104,7 @@
                     android:src="@drawable/ic_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="icon_user" />
+                    tools:ignore="ContentDescription" />
 
                 <EditText
                     android:focusable="false"
@@ -109,7 +117,9 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:importantForAutofill="no"
+                    tools:ignore="Deprecated,HardcodedText,KeyboardInaccessibleWidget" />
             </LinearLayout>
         </LinearLayout>
 
@@ -131,7 +141,9 @@
                 android:padding="10dp"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
         <Button
             android:id="@+id/button_add_subject"
@@ -143,6 +155,7 @@
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:targetApi="lollipop" />
+            tools:targetApi="lollipop"
+            tools:ignore="HardcodedText" />
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

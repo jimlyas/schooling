@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -18,7 +18,8 @@
             android:drawableStart="@drawable/ic_location"
             android:text="Ruangan"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
         <TextView
             android:id="@+id/d_subject_teacher"
             android:ellipsize="end"
@@ -29,7 +30,8 @@
             android:drawableStart="@drawable/ic_user"
             android:text="Dosen"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
     <TextView
         android:gravity="center_vertical"
@@ -40,5 +42,6 @@
         android:drawablePadding="5dp"
         android:drawableStart="@drawable/ic_subjects"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:ignore="HardcodedText" />
 </LinearLayout>

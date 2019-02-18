@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.eunsiljo.timetablelib.data.TimeData;
 import com.github.eunsiljo.timetablelib.data.TimeGridData;
@@ -159,9 +160,9 @@ public class schedule extends Fragment {
                 ((TextView)v.findViewById(R.id.d_date)).setText(current.day);
                 final MaterialDialog.Builder mdb = new MaterialDialog.Builder(Objects.requireNonNull(schedule.this.getContext()));
                 mdb.title(data.getTitle()).customView(v, true).negativeText("Close").positiveText("Delete");
-                mdb.callback(new MaterialDialog.ButtonCallback() {
+                mdb.onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         if(db.deleteTimetable(Integer.valueOf(current.id))){
                             Toast.makeText(schedule.this.getContext(), "Delete Success", Toast.LENGTH_SHORT).show();
 
@@ -227,7 +228,6 @@ public class schedule extends Fragment {
                         }else{
                             Toast.makeText(schedule.this.getContext(), "Delete Failed!", Toast.LENGTH_SHORT).show();
                         }
-                        super.onPositive(dialog);
                     }
                 });
                 mdb.build().show();

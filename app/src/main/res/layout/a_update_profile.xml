@@ -10,7 +10,8 @@
     android:focusable="true"
     android:focusedByDefault="true"
     android:layout_height="match_parent"
-    tools:context=".activities.update_profile">
+    tools:context=".activities.update_profile"
+    tools:ignore="UnusedAttribute">
 
     <FrameLayout
         android:layout_marginTop="20dp"
@@ -48,7 +49,8 @@
             android:padding="10dp"
             android:text="Tell us about yourself"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:background="@android:color/white"
@@ -70,7 +72,9 @@
                     android:padding="10dp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText"
+                    android:importantForAutofill="no" />
             </android.support.design.widget.TextInputLayout>
 
             <View
@@ -92,7 +96,9 @@
                     android:padding="10dp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    tools:ignore="HardcodedText" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </LinearLayout>

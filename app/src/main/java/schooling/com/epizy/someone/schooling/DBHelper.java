@@ -152,6 +152,17 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
     }
 
+
+    public String subject_location(String classname){
+        String location = "";
+        Cursor cursor = this.getReadableDatabase().rawQuery("select room from "+subject_table+" where name='"+classname+"'", null);
+        while (cursor.moveToNext()){
+            location = cursor.getString(0);
+        }
+        cursor.close();
+        return location;
+    }
+
     public boolean deleteSubject(int index){
         return database.delete(subject_table, "id="+index, null)>0;
     }
@@ -177,6 +188,16 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
     }
 
+    public void data_timetable_by_day(List<timetable_model> list, String day){
+        Cursor cursor = this.getReadableDatabase().rawQuery("select * from "+schedule_table+" where day='"+day+"'", null);
+        while (cursor.moveToNext()){
+            timetable_model current = new timetable_model(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+            current.setId(String.valueOf(cursor.getInt(0)));
+            list.add(current);
+        }
+        cursor.close();
+    }
+
     public int getTimeTableId(String The_name, String The_type){
         int id = 0;
         Cursor cursor = this.getReadableDatabase().rawQuery("select id from "+schedule_table+" where name='"+The_name+"' and type='"+The_type+"'", null);
@@ -187,15 +208,15 @@ public class DBHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public int getSubjectId(String The_name){
-        int id = 0;
-        Cursor cursor = this.getReadableDatabase().rawQuery("select id from "+subject_table+" where name='"+The_name+"'", null);
-        while (cursor.moveToNext()){
-            id = cursor.getInt(0);
-        }
-        cursor.close();
-        return id;
-    }
+//    public int getSubjectId(String The_name){
+//        int id = 0;
+//        Cursor cursor = this.getReadableDatabase().rawQuery("select id from "+subject_table+" where name='"+The_name+"'", null);
+//        while (cursor.moveToNext()){
+//            id = cursor.getInt(0);
+//        }
+//        cursor.close();
+//        return id;
+//    }
 
     public int getTeacherId(String The_name){
         int id = 0;

@@ -42,7 +42,9 @@
                 android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:importantForAutofill="no"
+                tools:ignore="Deprecated,HardcodedText,KeyboardInaccessibleWidget,UnusedAttribute" />
 
             <View
                 android:background="#eeeeee"
@@ -61,7 +63,8 @@
                 android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                tools:ignore="Autofill,Deprecated,HardcodedText,KeyboardInaccessibleWidget" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +88,7 @@
                     android:src="@drawable/ic_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="icon_date" />
+                    tools:ignore="ContentDescription" />
 
 
                 <EditText
@@ -100,7 +103,8 @@
                     android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    tools:ignore="Autofill,Deprecated,HardcodedText,KeyboardInaccessibleWidget" />
             </LinearLayout>
 
             <View
@@ -118,7 +122,7 @@
                     android:src="@drawable/ic_schedule"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="icon_schedule" />
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:textColor="@android:color/black"
@@ -127,7 +131,8 @@
                     android:layout_gravity="center_vertical"
                     android:text="Start"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText" />
 
                 <EditText
                     android:onClick="startTime_dialog"
@@ -140,7 +145,8 @@
                     android:padding="10dp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="Autofill,Deprecated,HardcodedText,KeyboardInaccessibleWidget,TextFields" />
             </LinearLayout>
 
             <View
@@ -159,7 +165,7 @@
                     android:src="@drawable/ic_schedule"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="icon_schedule" />
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:textColor="@android:color/black"
@@ -168,7 +174,8 @@
                     android:layout_gravity="center_vertical"
                     android:text="End  "
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText" />
 
                 <EditText
                     android:id="@+id/add_schedule_end_time"
@@ -181,7 +188,8 @@
                     android:padding="10dp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="Autofill,Deprecated,HardcodedText,KeyboardInaccessibleWidget,TextFields" />
             </LinearLayout>
         </LinearLayout>
 
@@ -196,6 +204,7 @@
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:targetApi="lollipop"/>
+            tools:targetApi="lollipop"
+            tools:ignore="HardcodedText" />
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

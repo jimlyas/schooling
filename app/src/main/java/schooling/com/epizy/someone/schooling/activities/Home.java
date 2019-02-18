@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -46,6 +47,8 @@ public class Home extends AppCompatActivity {
     Toolbar tb; FrameLayout fl; DrawerLayout dl; CoordinatorLayout cl; NavigationView nv;
     FragmentManager fm; ActionBarDrawerToggle ActionBarDrawer;
     FloatingActionMenu fab_all;
+
+    @SuppressLint("StaticFieldLeak")
     private static home HomeFragment = new home();
     private DBHelper database;
     private SharedPreferences pref;
@@ -76,7 +79,7 @@ public class Home extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         Objects.requireNonNull(ab).setDisplayHomeAsUpEnabled(true); ab.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        nv.addHeaderView(getLayoutInflater().from(this).inflate(R.layout.nav_header, nv, false));
+        nv.addHeaderView(LayoutInflater.from(this).inflate(R.layout.nav_header, nv, false));
         nv.getHeaderView(0).setVisibility(View.GONE);
         if (pref.getBoolean("user", false)){
             nv.getHeaderView(0).setVisibility(View.VISIBLE);

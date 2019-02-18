@@ -1,5 +1,6 @@
 package schooling.com.epizy.someone.schooling.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
@@ -53,11 +55,11 @@ public class subject_adapter  extends RecyclerView.Adapter<subject_adapter.ViewH
         return list.size();
     }
 
-    public subject_model getItem(int position){
-        return list.get(position);
-    }
+//    public subject_model getItem(int position){
+//        return list.get(position);
+//    }
 
-    public void removeItem(int position){
+    private void removeItem(int position){
         list.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, list.size());
@@ -73,7 +75,7 @@ public class subject_adapter  extends RecyclerView.Adapter<subject_adapter.ViewH
             cd = itemView.findViewById(R.id.root_rec_subject);
 
 
-            final View v = LayoutInflater.from(context).inflate(R.layout.d_subjects, null);
+            @SuppressLint("InflateParams") final View v = LayoutInflater.from(context).inflate(R.layout.d_subjects, null);
             cd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -85,10 +87,9 @@ public class subject_adapter  extends RecyclerView.Adapter<subject_adapter.ViewH
                     mdb.title(name.getText().toString()).customView(v, true)
                             .negativeText("Delete").positiveText("Edit").neutralText("Close").autoDismiss(true);
 
-                    mdb.callback(new MaterialDialog.ButtonCallback() {
+                    mdb.onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            super.onPositive(dialog);
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                             Intent edit = new Intent(context, add_subject.class);
                             edit.putExtra("RequestCode", "12");
                             edit.putExtra("name", current.name);
@@ -99,9 +100,9 @@ public class subject_adapter  extends RecyclerView.Adapter<subject_adapter.ViewH
                             edit.putExtra("index", String.valueOf(index));
                             ((Activity)context).startActivityForResult(edit, 12);
                         }
-
+                    }).onNegative(new MaterialDialog.SingleButtonCallback() {
                         @Override
-                        public void onNegative(MaterialDialog dialog) {
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                             //TODO[Confirmation] Ask confirmation when delete
                             //That All the timetable for scheduled subject will also be deleted
                             if(database.deleteSubject(Integer.valueOf(current.id))){
@@ -109,12 +110,11 @@ public class subject_adapter  extends RecyclerView.Adapter<subject_adapter.ViewH
                             }else{
                                 Toast.makeText(context, "Delete subject Failed!", Toast.LENGTH_SHORT).show();
                             }
-                            super.onNegative(dialog);
                         }
-
+                    }).onNeutral(new MaterialDialog.SingleButtonCallback() {
                         @Override
-                        public void onNeutral(MaterialDialog dialog) {
-                            super.onNeutral(dialog); dialog.dismiss();
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
                         }
                     });
 

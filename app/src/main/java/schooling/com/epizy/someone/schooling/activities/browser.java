@@ -76,7 +76,7 @@ public class browser extends AppCompatActivity {
         }else if(item.getItemId()==R.id.menu_browser_copy){
             ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData data = ClipData.newPlainText("Url-Link", tb.getSubtitle());
-            clip.setPrimaryClip(data);
+            Objects.requireNonNull(clip).setPrimaryClip(data);
             Snackbar.make(findViewById(R.id.root_browser), "Link copied!", Snackbar.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);

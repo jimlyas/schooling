@@ -23,7 +23,8 @@
             android:text="B"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
         <LinearLayout
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
@@ -37,7 +38,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:text="teacher's name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:ignore="HardcodedText" />
             <TextView
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:id="@+id/rec_teacher_phone"
@@ -46,7 +48,8 @@
                 android:textColor="#424242"
                 android:text="teacher's phone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package schooling.com.epizy.someone.schooling.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -7,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -30,6 +30,7 @@ public class libraries_adapter  extends RecyclerView.Adapter<libraries_adapter.V
         return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.rec_open_source, parent, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         library_source current = list.get(position);

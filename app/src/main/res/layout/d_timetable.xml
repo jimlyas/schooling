@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -14,13 +15,13 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="Type :  "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/d_type"
             android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:text="Null"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -33,7 +34,6 @@
         android:gravity="center_vertical"
         android:textColor="@android:color/black"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="Days"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -49,13 +49,13 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_schedule"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
         <TextView
             android:layout_gravity="center_vertical"
             android:id="@+id/d_start_hour"
             android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:text="10:00 "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -63,13 +63,13 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text=" To "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
         <TextView
             android:layout_gravity="center_vertical"
             android:id="@+id/d_end_hour"
             android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:text="20:00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
@@ -68,13 +70,11 @@ public class teachers extends Fragment {
         final EditText input_phone = v.findViewById(R.id.input_phone_teacher);
         mdb.title("Add Teacher").customView(v, false).positiveText("Add").negativeText("Cancel").autoDismiss(true);
 
-        mdb.callback(new MaterialDialog.ButtonCallback() {
+        mdb.onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
-            public void onPositive(MaterialDialog dialog) {
-                super.onPositive(dialog);
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 String name = input_name.getText().toString();
                 String phone = input_phone.getText().toString();
-
 
                 if(!name.matches("")||!phone.matches("")){
                     if(database.add_teacher(new teacher_model(name, phone))){
@@ -89,12 +89,11 @@ public class teachers extends Fragment {
                 }else{
                     Toast.makeText(teachers.this.getContext(), "Fill all the fields!", Toast.LENGTH_SHORT).show();
                 }
-
             }
-
+        }).onNegative(new MaterialDialog.SingleButtonCallback() {
             @Override
-            public void onNegative(MaterialDialog dialog) {
-                super.onNegative(dialog);dialog.dismiss();
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                dialog.dismiss();
             }
         });
 

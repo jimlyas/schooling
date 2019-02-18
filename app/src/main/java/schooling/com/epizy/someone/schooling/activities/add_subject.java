@@ -31,6 +31,7 @@ public class add_subject extends AppCompatActivity {
     Toolbar tb; MaterialDialog.Builder mdb;
     TextView name, room, teacher, note; DBHelper database;
     ArrayList<String> nama; String selected_teacher;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,17 +124,19 @@ public class add_subject extends AppCompatActivity {
                             selected_teacher = nama.get(which);
                             return true;
                         }
-                    }).callback(new MaterialDialog.ButtonCallback() {
+                    })
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
                 @Override
-                public void onPositive(MaterialDialog dialog) {
-                    super.onPositive(dialog); teacher.setText(selected_teacher);
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    teacher.setText(selected_teacher);
                 }
-
+                }).onNegative(new MaterialDialog.SingleButtonCallback() {
                 @Override
-                public void onNegative(MaterialDialog dialog) {
-                    super.onNegative(dialog); dialog.dismiss();
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    dialog.dismiss();
                 }
-            }).alwaysCallSingleChoiceCallback().show();
+            })
+                    .alwaysCallSingleChoiceCallback().show();
         }else {
             new MaterialDialog.Builder(this).title("Select a Teacher").content("There is no teacher's data")
                     .positiveText("Add new teacher").negativeText("cancel").onPositive(new MaterialDialog.SingleButtonCallback() {
