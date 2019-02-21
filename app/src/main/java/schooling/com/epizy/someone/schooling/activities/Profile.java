@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import schooling.com.epizy.someone.schooling.R;
+import spencerstudios.com.bungeelib.Bungee;
 
 public class Profile extends AppCompatActivity {
 
@@ -34,6 +35,12 @@ public class Profile extends AppCompatActivity {
     public void editProfile(View view) {
         Intent i = new Intent(this, update_profile.class);
         startActivity(i);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        Bungee.fade(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Bungee.slideRight(this);
     }
 }

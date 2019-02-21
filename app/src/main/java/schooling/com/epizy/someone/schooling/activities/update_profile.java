@@ -15,8 +15,12 @@ import android.widget.Toast;
 import com.github.clans.fab.FloatingActionMenu;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import schooling.com.epizy.someone.schooling.R;
+import spencerstudios.com.bungeelib.Bungee;
 
 public class update_profile extends AppCompatActivity {
     EditText name, major;
@@ -28,6 +32,7 @@ public class update_profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_update_profile);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         name = findViewById(R.id.update_name);
         major = findViewById(R.id.update_major);
         ((FloatingActionMenu)findViewById(R.id.open_cropper)).setOnMenuButtonClickListener(new View.OnClickListener() {
@@ -90,7 +95,15 @@ public class update_profile extends AppCompatActivity {
                 prefEditor.commit();
                 finish();
             }
+        }else if (item.getItemId()==android.R.id.home){
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Bungee.shrink(this);
     }
 }

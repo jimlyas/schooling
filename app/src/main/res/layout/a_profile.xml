@@ -6,61 +6,73 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.Profile">
-    <ImageView
-        android:alpha="0.76"
-        android:id="@+id/back_profile"
-        android:scaleType="fitXY"
-        android:src="@drawable/back"
-        android:background="#e0e0e0"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:contentDescription="@string/todo" />
 
-    <ImageButton
-        android:onClick="editProfile"
-        android:background="?attr/selectableItemBackground"
-        android:layout_margin="10dp"
-        android:layout_gravity="top|end"
-        android:src="@drawable/ic_edit"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:contentDescription="@string/todo" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image_profile"
-        app:civ_border_color="@android:color/black"
-        app:civ_border_width="1dp"
-        app:layout_anchorGravity="bottom|center_horizontal"
-        app:layout_anchor="@id/back_profile"
-        android:src="@drawable/user_placeholder"
-        android:layout_width="125dp"
-        android:layout_height="125dp" />
-
-    <LinearLayout
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical"
+    <FrameLayout
+        android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/name_profile"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/black"
-            android:gravity="center_horizontal"
-            android:text="Not Defined yet!"
+
+        <ImageView
+            android:alpha="0.76"
+            android:id="@+id/back_profile"
+            android:scaleType="fitXY"
+            android:src="@drawable/scho_back"
+            android:background="#e0e0e0"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="HardcodedText" />
+            android:layout_height="250dp"
+            tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/major_profile"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:layout_gravity="center_horizontal"
-            android:text="Not yet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="HardcodedText" />
+        <ImageButton
+            android:onClick="editProfile"
+            android:background="?attr/selectableItemBackground"
+            android:layout_margin="10dp"
+            android:layout_gravity="top|end"
+            android:src="@drawable/ic_edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            tools:ignore="ContentDescription" />
 
-    </LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_profile"
+            app:civ_border_color="@android:color/black"
+            app:civ_border_width="1dp"
+            android:layout_gravity="center"
+            android:src="@drawable/user_placeholder"
+            android:layout_width="125dp"
+            android:layout_height="125dp" />
+    </FrameLayout>
+
+    <android.support.v7.widget.CardView
+        app:cardElevation="5dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/name_profile"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:gravity="center_horizontal"
+                android:text="Not Defined yet!"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/major_profile"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_gravity="center_horizontal"
+                android:text="Not yet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </android.support.design.widget.CoordinatorLayout>

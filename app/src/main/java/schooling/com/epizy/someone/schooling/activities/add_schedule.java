@@ -21,6 +21,7 @@ import java.util.Objects;
 
 import schooling.com.epizy.someone.schooling.DBHelper;
 import schooling.com.epizy.someone.schooling.R;
+import spencerstudios.com.bungeelib.Bungee;
 
 public class add_schedule extends AppCompatActivity{
     DBHelper db; ArrayList<String> subject_name; ArrayList<String> days_name;
@@ -168,5 +169,11 @@ public class add_schedule extends AppCompatActivity{
 
     public void endTime_dialog(View view) {
         EndDialog.show(getFragmentManager(), "End Time Dialog");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Bungee.slideDown(this);
     }
 }

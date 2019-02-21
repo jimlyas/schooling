@@ -5,6 +5,7 @@ android {
     defaultConfig {
         applicationId "schooling.com.epizy.someone.schooling"
         minSdkVersion 19
+        //noinspection OldTargetApi
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -25,14 +26,16 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
     implementation 'com.github.EunsilJo:TimeTable:1.0'
     implementation 'com.wdullaer:materialdatetimepicker:3.6.0'
+    implementation 'com.github.Binary-Finery:Bungee:master-SNAPSHOT'
     implementation 'com.github.castorflex.smoothprogressbar:library:1.1.0'
     implementation 'com.github.BoD:aLibGlitch:1.0.0'
+    //noinspection GradleDependency
     implementation 'com.github.clans:fab:1.6.2'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:animated-vector-drawable:27.1.1'
     implementation 'com.android.support:percent:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-v4:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

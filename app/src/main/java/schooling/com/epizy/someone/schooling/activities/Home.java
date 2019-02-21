@@ -42,6 +42,7 @@ import schooling.com.epizy.someone.schooling.fragments.schedule;
 import schooling.com.epizy.someone.schooling.fragments.subjects;
 import schooling.com.epizy.someone.schooling.fragments.teachers;
 import schooling.com.epizy.someone.schooling.models.teacher_model;
+import spencerstudios.com.bungeelib.Bungee;
 
 public class Home extends AppCompatActivity {
     Toolbar tb; FrameLayout fl; DrawerLayout dl; CoordinatorLayout cl; NavigationView nv;
@@ -115,9 +116,13 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 boolean check = fab_all.isOpened();
                 switch (tb.getTitle().toString()){
-                    case "Schedule": startActivityForResult(new Intent(Home.this, add_schedule.class), 2);
+                    case "Schedule":
+                        startActivityForResult(new Intent(Home.this, add_schedule.class), 2);
+                        Bungee.slideUp(Home.this);
                         break;
-                    case "Subjects": startActivityForResult(new Intent(Home.this, add_subject.class), 11);
+                    case "Subjects":
+                        startActivityForResult(new Intent(Home.this, add_subject.class), 11);
+                        Bungee.slideUp(Home.this);
                         break;
                     case "Teachers": TeacherFragment.mdb.show();
                         break;
@@ -158,9 +163,10 @@ public class Home extends AppCompatActivity {
                     case  R.id.menu_profile:
                         if (getSharedPreferences("preferences", MODE_PRIVATE).getString("PROFILE",null)==null){
                             startActivity(new Intent(Home.this, update_profile.class));
+                            Bungee.fade(Home.this);
                         }else {
                             startActivity(new Intent(Home.this, Profile.class));
-                            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                            Bungee.slideLeft(Home.this);
                         }
                         break;
 
@@ -293,9 +299,13 @@ public class Home extends AppCompatActivity {
                             }
                         }).build().show();
                         break;
-                    case R.id.fab2: startActivityForResult(new Intent(Home.this, add_subject.class), 11);
+                    case R.id.fab2:
+                        startActivityForResult(new Intent(Home.this, add_subject.class), 11);
+                        Bungee.slideUp(Home.this);
                         break;
-                    case R.id.fab3: startActivityForResult(new Intent(Home.this, add_schedule.class), 2);
+                    case R.id.fab3:
+                        startActivityForResult(new Intent(Home.this, add_schedule.class), 2);
+                        Bungee.slideUp(Home.this);
                         break;
                 }
             }

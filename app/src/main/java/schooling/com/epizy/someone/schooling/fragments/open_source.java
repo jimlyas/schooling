@@ -49,5 +49,6 @@ public class open_source extends Fragment {
         list.add(new library_source("SmoothProgressBar", "https://github.com/castorflex/SmoothProgressBar", "castorflex"));
         list.add(new library_source("FloatingActionButton", "https://github.com/Clans/FloatingActionButton", "Clans"));
         list.add(new library_source("Android-Image-Cropper", "https://github.com/ArthurHub/Android-Image-Cropper", "ArthurHub"));
+        list.add(new library_source("Bungee", "https://github.com/Binary-Finery/Bungee", "Binary-Finery"));
     }
 }

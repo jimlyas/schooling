@@ -26,6 +26,7 @@ import schooling.com.epizy.someone.schooling.DBHelper;
 import schooling.com.epizy.someone.schooling.models.subject_model;
 import schooling.com.epizy.someone.schooling.R;
 import schooling.com.epizy.someone.schooling.models.teacher_model;
+import spencerstudios.com.bungeelib.Bungee;
 
 public class add_subject extends AppCompatActivity {
     Toolbar tb; MaterialDialog.Builder mdb;
@@ -195,5 +196,11 @@ public class add_subject extends AppCompatActivity {
     public void startActivityForResult(Intent intent, int requestCode) {
         intent.putExtra("RequestCode", requestCode);
         super.startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Bungee.slideDown(this);
     }
 }
